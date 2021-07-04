@@ -1,11 +1,7 @@
-import Map from './components/Map';
+import PlaceList from "./pages/PlaceList";
 
 function App() {
-    return (
-        <div className="App">
-            <Map />
-        </div>
-    );
+  return <PlaceList />;
 }
 
 export default App;
