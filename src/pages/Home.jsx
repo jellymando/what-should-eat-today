@@ -1,22 +1,39 @@
-import React, { useEffect } from "react";
+/* eslint-disable no-undef */
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Map from "../components/Map";
 
 const Home = () => {
+  const [placeList, setPlaceList] = useState([]);
   const getPlaces = async () => {
-    try {
-      const res = await axios.get("/places");
-      console.log(res.data);
-    } catch (e) {
-      console.log(e);
+    const res = await axios.get("/places");
+    const data = res.data;
+    if (data) {
+      const places = [];
+      for (let i in data) {
+        places.push({
+          title: data[i].title,
+          latlng: {
+            x: data[i].latlng.x,
+            y: data[i].latlng.y,
+          },
+        });
+      }
+      setPlaceList(places);
     }
   };
+
   useEffect(() => {
     getPlaces();
   }, []);
+
+  useEffect(() => {
+    console.log("placeList", placeList);
+  }, [placeList]);
+
   return (
     <>
-      <Map />
+      <Map placeList={placeList} />
     </>
   );
 };

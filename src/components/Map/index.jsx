@@ -1,20 +1,44 @@
 /* eslint-disable no-undef */
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import { MAP } from "../../constants/constant";
 import { MapContainer } from "./styled";
 
-const Map = ({ searchKeyword }) => {
+const Map = ({ placeList, searchKeyword }) => {
   const mapRef = useRef(null);
+  const [map, setMap] = useState(null);
   const options = {
     center: new kakao.maps.LatLng(MAP.CENTER.X, MAP.CENTER.Y),
     level: 4,
   };
   const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+  const markerImg =
+    "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+  const markerSize = new kakao.maps.Size(24, 35);
 
   useEffect(() => {
     if (!mapRef.current) return;
-    const map = new kakao.maps.Map(mapRef.current, options);
+    setMap(new kakao.maps.Map(mapRef.current, options));
   }, [mapRef]);
+
+  useEffect(() => {
+    if (!placeList) return;
+
+    for (let i in placeList) {
+      const markerImage = new kakao.maps.MarkerImage(markerImg, markerSize);
+
+      const position = new kakao.maps.LatLng(
+        placeList[i].latlng.x,
+        placeList[i].latlng.y
+      );
+
+      const marker = new kakao.maps.Marker({
+        map: map,
+        position: position,
+        title: placeList[i].title,
+        image: markerImage,
+      });
+    }
+  }, [placeList]);
 
   useEffect(() => {
     if (searchKeyword) {
@@ -28,7 +52,7 @@ const Map = ({ searchKeyword }) => {
         if (status === kakao.maps.services.Status.OK) {
           console.log("data", data);
 
-          for (var i = 0; i < data.length; i++) {
+          for (let i = 0; i < data.length; i++) {
             displayMarker(data[i]);
           }
         }

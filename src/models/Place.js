@@ -6,8 +6,11 @@ const placeSchema = new Schema({
     type: String,
     required: true,
   },
-  latLng: {
-    type: Object,
+  latlng: {
+    type: {
+      x: Number,
+      y: Number,
+    },
     required: true,
   },
 });
