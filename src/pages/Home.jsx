@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Map from "../components/Map";
+import HomeMap from "../components/HomeMap";
 
 const Home = () => {
   const [placeList, setPlaceList] = useState([]);
@@ -33,7 +33,7 @@ const Home = () => {
 
   return (
     <>
-      <Map placeList={placeList} />
+      <HomeMap placeList={placeList} />
     </>
   );
 };

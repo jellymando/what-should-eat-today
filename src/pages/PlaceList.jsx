@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Map from "../components/Map";
+import PlaceListMap from "../components/PlaceListMap";
 import SearchBox from "../components/SearchBox";
 import ButtonBox from "../components/ButtonBox";
 
@@ -8,7 +8,6 @@ const PlaceList = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [selectedPlace, setSelectedPlace] = useState({ name: "", x: 0, y: 0 });
   const addPlace = async () => {
-    console.log("selectedPlace", selectedPlace);
     await axios.post("/places", {
       name: selectedPlace.name,
       latlng: {
@@ -25,7 +24,10 @@ const PlaceList = () => {
   return (
     <>
       <SearchBox setSearchKeyword={setSearchKeyword} />
-      <Map searchKeyword={searchKeyword} setSelectedPlace={setSelectedPlace} />
+      <PlaceListMap
+        searchKeyword={searchKeyword}
+        setSelectedPlace={setSelectedPlace}
+      />
       <ButtonBox handleClick={addPlace} />
     </>
   );
