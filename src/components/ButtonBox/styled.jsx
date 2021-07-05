@@ -4,7 +4,7 @@ export const ButtonWrap = styled.div`
   margin-top: 10px;
 `;
 
-export const StyledButton = styled.button`
+export const Button = styled.button`
   width: 100%;
   height: 50px;
   font-size: 18px;

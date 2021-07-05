@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Map from "../components/Map";
-import Search from "../components/Search";
-import Button from "../components/Button";
+import SearchBox from "../components/SearchBox";
+import ButtonBox from "../components/ButtonBox";
 
 const PlaceList = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -24,9 +24,9 @@ const PlaceList = () => {
 
   return (
     <>
-      <Search setSearchKeyword={setSearchKeyword} />
+      <SearchBox setSearchKeyword={setSearchKeyword} />
       <Map searchKeyword={searchKeyword} setSelectedPlace={setSelectedPlace} />
-      <Button handleClick={addPlace} />
+      <ButtonBox handleClick={addPlace} />
     </>
   );
 };

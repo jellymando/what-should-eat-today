@@ -79,7 +79,7 @@ const Map = ({ placeList, searchKeyword, setSelectedPlace }) => {
     }
   }, [searchKeyword]);
 
-  return <MapContainer ref={mapRef}></MapContainer>;
+  return <MapContainer ref={mapRef} />;
 };
 
 export default Map;

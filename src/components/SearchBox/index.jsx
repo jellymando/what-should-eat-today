@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { SearchWrap, SearchInput, SearchButton } from "./styled";
 
-const Search = ({ setSearchKeyword }) => {
+const SearchBox = ({ setSearchKeyword }) => {
   const searchInputRef = useRef(null);
 
   const handleSearch = () => {
@@ -17,4 +17,4 @@ const Search = ({ setSearchKeyword }) => {
   );
 };
 
-export default Search;
+export default SearchBox;
