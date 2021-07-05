@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const placeSchema = new Schema({
-  title: {
+  name: {
     type: String,
     required: true,
   },
@@ -12,6 +12,10 @@ const placeSchema = new Schema({
       y: Number,
     },
     required: true,
+    unique: true,
+  },
+  keywords: {
+    type: [String],
   },
 });
 

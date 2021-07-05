@@ -12,7 +12,7 @@ const Home = () => {
       const places = [];
       for (let i in data) {
         places.push({
-          title: data[i].title,
+          name: data[i].name,
           latlng: {
             x: data[i].latlng.x,
             y: data[i].latlng.y,
