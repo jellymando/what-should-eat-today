@@ -1,6 +1,5 @@
 import React from "react";
-import { HeaderWrap } from "./styled";
-import { default as Logo } from "/img/r-bob.png";
+import { HeaderWrap, Logo } from "./styled";
 
 const Header = () => {
     return (

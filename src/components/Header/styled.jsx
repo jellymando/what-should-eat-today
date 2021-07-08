@@ -1,6 +1,14 @@
 import styled from "styled-components";
 
 export const HeaderWrap = styled.div`
-    height: 60px;
-    margin-bottom: 10px;
+    display: flex;
+    align-item: center;
+    justify-content: center;
+    height: 55px;
+`;
+
+export const Logo = styled.div`
+    width: 120px;
+    height: 55px;
+    background-image: url("/img/r-bob.png");
 `;
