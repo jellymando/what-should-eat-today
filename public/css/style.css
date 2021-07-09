@@ -1,6 +1,17 @@
+html,
+body {
+    height: 100%;
+}
+
 * {
     padding: 0;
     margin: 0;
     border: 0;
     outline: none;
+}
+
+#root {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 10px;
 }
