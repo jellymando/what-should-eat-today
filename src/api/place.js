@@ -1,14 +1,36 @@
 import axios from "axios";
 
-export const addPlace = async (selectedPlace) => {
+export const getPlaces = async () => {
+    try {
+        const res = await axios.get("/places");
+        const data = res.data;
+        if (data) {
+            const places = [];
+            for (let i in data) {
+                places.push({
+                    name: data[i].name,
+                    latlng: {
+                        x: data[i].latlng.x,
+                        y: data[i].latlng.y,
+                    },
+                });
+            }
+            return places;
+        }
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+export const addPlace = async (place) => {
     try {
         const {
             data: { success, err },
         } = await axios.post("/places", {
-            name: selectedPlace.name,
+            name: place.name,
             latlng: {
-                x: selectedPlace.x,
-                y: selectedPlace.y,
+                x: place.x,
+                y: place.y,
             },
         });
         if (!success) {
@@ -18,7 +40,6 @@ export const addPlace = async (selectedPlace) => {
                     break;
             }
         }
-        return;
     } catch (e) {
         console.log(e);
     }
