@@ -1,16 +1,16 @@
 import React from "react";
-import PlaceListMap from "../components/PlaceListMap";
+import PlaceList from "../components/PlaceList";
 import SearchBox from "../components/SearchBox";
 import ButtonBox from "../components/ButtonBox";
 
-const PlaceList = () => {
+const Place = () => {
     return (
         <>
             <SearchBox />
-            <PlaceListMap />
+            <PlaceList />
             <ButtonBox />
         </>
     );
 };
 
-export default PlaceList;
+export default Place;
