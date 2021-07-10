@@ -1,20 +1,22 @@
 /* eslint-disable no-undef */
 import React, { useRef, useState, useEffect } from "react";
+import { useRecoilValue } from "recoil";
 import Map from "lib/Map";
+import { placeListSelector } from "store/selector";
 import { MapContainer } from "./styled";
 
-const HomeMap = ({ placeList }) => {
+const HomeMap = () => {
     const mapRef = useRef(null);
     const [map, setMap] = useState({});
+    const placeList = useRecoilValue(placeListSelector);
 
     useEffect(() => {
         if (!mapRef.current) return;
-        const map = new Map({ ref: mapRef.current });
-        setMap(map);
+        setMap(new Map({ ref: mapRef.current }));
     }, [mapRef]);
 
     useEffect(() => {
-        if (!placeList) return;
+        if (!map.$map || !placeList.length > 0) return;
         for (let i in placeList) {
             const position = new kakao.maps.LatLng(placeList[i].latlng.y, placeList[i].latlng.x);
             map.displayMarker({
