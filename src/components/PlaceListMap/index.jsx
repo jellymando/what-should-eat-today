@@ -7,7 +7,7 @@ import { MapContainer } from "./styled";
 
 const PlaceListMap = () => {
     const mapRef = useRef(null);
-    const [plcaeListMap, setPlaceListMap] = useState({});
+    const [map, setMap] = useState({});
     const searchKeyword = useRecoilValue(searchKeywordState);
     const setSelectedPlace = useSetRecoilState(selectedPlaceState);
 
@@ -22,7 +22,7 @@ const PlaceListMap = () => {
     useEffect(() => {
         if (!mapRef.current) return;
         const map = new Map({ ref: mapRef.current });
-        setPlaceListMap(map);
+        setMap(map);
     }, [mapRef]);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const PlaceListMap = () => {
             if (status === kakao.maps.services.Status.OK) {
                 for (let i = 0; i < data.length; i++) {
                     const position = new kakao.maps.LatLng(data[i].y, data[i].x);
-                    plcaeListMap.displayMarker({
+                    map.displayMarker({
                         placeName: data[i].place_name,
                         position,
                         handleClickTarget,
@@ -42,7 +42,7 @@ const PlaceListMap = () => {
                 }
             }
         }
-    }, [plcaeListMap, searchKeyword]);
+    }, [map, searchKeyword]);
 
     return <MapContainer ref={mapRef} />;
 };
