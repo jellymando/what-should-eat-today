@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import PlaceList from "./pages/PlaceList";
+import Place from "./pages/Place";
 
 function App() {
     return (
@@ -12,10 +12,14 @@ function App() {
                 <Header />
                 <Switch>
                     <Route exact path="/">
-                        <Home />
+                        <Suspense fallback={<></>}>
+                            <Home />
+                        </Suspense>
                     </Route>
-                    <Route path="/placeList">
-                        <PlaceList />
+                    <Route path="/place">
+                        <Suspense fallback={<></>}>
+                            <Place />
+                        </Suspense>
                     </Route>
                 </Switch>
             </Router>
