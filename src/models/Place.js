@@ -2,21 +2,22 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const placeSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  latlng: {
-    type: {
-      x: Number,
-      y: Number,
+    _id: Schema.Types.ObjectId,
+    name: {
+        type: String,
+        required: true,
     },
-    required: true,
-    unique: true,
-  },
-  keywords: {
-    type: [String],
-  },
+    latlng: {
+        type: {
+            x: Number,
+            y: Number,
+        },
+        required: true,
+        unique: true,
+    },
+    keywords: {
+        type: [String],
+    },
 });
 
 const Place = mongoose.model("Place", placeSchema);

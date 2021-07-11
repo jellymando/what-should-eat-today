@@ -3,20 +3,7 @@ import axios from "axios";
 export const getPlaces = async () => {
     try {
         const res = await axios.get("/places");
-        const data = res.data;
-        if (data) {
-            const places = [];
-            for (let i in data) {
-                places.push({
-                    name: data[i].name,
-                    latlng: {
-                        x: data[i].latlng.x,
-                        y: data[i].latlng.y,
-                    },
-                });
-            }
-            return places;
-        }
+        return res.data;
     } catch (e) {
         console.log(e);
     }
@@ -27,6 +14,7 @@ export const addPlace = async (place) => {
         const {
             data: { success, err },
         } = await axios.post("/places", {
+            _id: place._id,
             name: place.name,
             latlng: {
                 x: place.x,

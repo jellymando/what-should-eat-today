@@ -12,5 +12,5 @@ export const searchKeywordState = atom({
 
 export const selectedPlaceState = atom({
     key: "selectedPlaceState",
-    default: { name: "", x: 0, y: 0 },
+    default: {},
 });
