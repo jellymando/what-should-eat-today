@@ -1,5 +1,5 @@
 import React from "react";
-import HomeMap from "../components/HomeMap";
+import HomeMap from "components/HomeMap";
 
 const Home = () => {
     return (

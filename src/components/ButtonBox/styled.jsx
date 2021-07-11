@@ -7,7 +7,7 @@ export const ButtonWrap = styled.div`
 
 export const Button = styled.button`
     width: 100%;
-    height: 50px;
+    height: 45px;
     font-size: ${FONTSIZE.LARGE};
     color: ${COLOR.WHITE};
     background: ${COLOR.ORANGE1};
