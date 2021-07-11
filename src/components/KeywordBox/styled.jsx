@@ -13,34 +13,6 @@ export const Container = styled.div`
     z-index: 99;
 `;
 
-export const AddKeywordWrap = styled.div`
-    display: flex;
-    height: 40px;
-    margin-bottom: 10px;
-`;
-
-export const AddKeywordInput = styled.input`
-    width: 100%;
-    color: ${COLOR.BLACK2};
-    font-size: ${FONTSIZE.LARGE};
-    padding: 7px 10px;
-    border: 1px solid ${COLOR.GRAY1};
-    border-radius: 5px;
-    outline: none;
-`;
-
-export const AddKeywordButton = styled.button`
-    flex: 1 0 52px;
-    color: ${COLOR.WHITE};
-    font-size: ${FONTSIZE.SMALL};
-    background: ${COLOR.ORANGE2};
-    border-radius: 5px;
-    margin-left: 5px;
-    border: 0;
-    outline: none;
-    cursor: pointer;
-`;
-
 export const KeywordWrap = styled.div`
     display: flex;
     align-items: center;

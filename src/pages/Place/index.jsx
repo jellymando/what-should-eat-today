@@ -4,7 +4,7 @@ import { selectedPlaceState, searchKeywordState } from "store/atom";
 import { addPlace } from "api/place";
 import PlaceList from "components/PlaceList";
 import PlaceListMap from "components/PlaceListMap";
-import SearchBox from "components/SearchBox";
+import InputButtonBox from "components/InputButtonBox";
 import ButtonBox from "components/ButtonBox";
 import KeywordBox from "components/KeywordBox";
 import { Container, SideButton } from "./styled";
@@ -34,7 +34,7 @@ const Place = () => {
             {isAddPlace ? (
                 <>
                     <Container>
-                        <SearchBox handleClickButton={searchButtonHandler} />
+                        <InputButtonBox buttonText="검색" handleClickButton={searchButtonHandler} />
                         <PlaceListMap />
                         {selectedPlace && <KeywordBox />}
                     </Container>

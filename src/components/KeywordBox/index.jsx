@@ -1,17 +1,19 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { keywordSelector } from "store/selector";
 import { addedKeywordState } from "store/atom";
 import { addKeyword } from "api/keyword";
-import { Container, AddKeywordWrap, AddKeywordInput, AddKeywordButton, KeywordWrap, Keyword } from "./styled";
+import InputButtonBox from "components/InputButtonBox";
+import { Container, KeywordWrap, Keyword } from "./styled";
 
 const KeywordBox = () => {
     const inputRef = useRef(null);
     const keywordList = useRecoilValue(keywordSelector);
     const addedKeyword = useSetRecoilState(addedKeywordState);
 
-    const addKeywordHandler = async (value) => {
-        const { success, err } = await addKeyword({ title: value });
+    const addKeywordHandler = useCallback(async () => {
+        if (!inputRef.current) return;
+        const { success, err } = await addKeyword({ title: inputRef.current.value });
         if (!success) {
             switch (err.code) {
                 case 11000:
@@ -19,16 +21,13 @@ const KeywordBox = () => {
                     break;
             }
         } else {
-            addedKeyword(value);
+            addedKeyword(inputRef.current.value);
         }
-    };
+    }, [inputRef.current]);
 
     return (
         <Container>
-            <AddKeywordWrap>
-                <AddKeywordInput ref={inputRef} />
-                <AddKeywordButton onClick={() => addKeywordHandler(inputRef.current.value)}>추가</AddKeywordButton>
-            </AddKeywordWrap>
+            <InputButtonBox buttonText="추가" handleClickButton={addKeywordHandler} />
             <KeywordWrap>
                 {keywordList &&
                     keywordList.map((keyword) => {

@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
 import { SearchWrap, SearchInput, SearchButton } from "./styled";
 
-const SearchBox = ({ handleClickButton }) => {
+const InputButtonBox = ({ buttonText, handleClickButton }) => {
     const searchInputRef = useRef(null);
 
     return (
         <SearchWrap>
             <SearchInput ref={searchInputRef} />
-            <SearchButton onClick={() => handleClickButton(searchInputRef.current.value)}>검색</SearchButton>
+            <SearchButton onClick={() => handleClickButton(searchInputRef.current.value)}>{buttonText}</SearchButton>
         </SearchWrap>
     );
 };
 
-export default SearchBox;
+export default InputButtonBox;
