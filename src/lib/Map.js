@@ -1,17 +1,21 @@
 /* eslint-disable no-undef */
-import { MAP } from "../constants/map";
+import { MAP } from "constants/map";
 
 export default class Map {
     constructor({ ref }) {
+        this.center = new kakao.maps.LatLng(MAP.CENTER.Y, MAP.CENTER.X);
         this.options = {
-            center: new kakao.maps.LatLng(MAP.CENTER.Y, MAP.CENTER.X),
-            level: 4,
+            center: this.center,
+            level: 6,
         };
         this.$map = new kakao.maps.Map(ref, this.options);
+        this.zoomControl = new kakao.maps.ZoomControl();
+        this.bounds = this.$map.getBounds();
         this.infowindow = new kakao.maps.InfoWindow(MAP.INFO_WINDOW_STYLE);
         this.markerImg = MAP.MARKER_IMG;
         this.markerSize = new kakao.maps.Size(...MAP.MARKER_SIZE);
         this.markerImage = new kakao.maps.MarkerImage(this.markerImg, this.markerSize);
+        this.$map.addControl(this.zoomControl, kakao.maps.ControlPosition.BOTTOMLEFT);
     }
 
     displayInfoWindow({ placeName, marker }) {

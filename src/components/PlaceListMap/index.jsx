@@ -23,16 +23,17 @@ const PlaceListMap = () => {
 
     useEffect(() => {
         if (!mapRef.current) return;
-        const map = new Map({ ref: mapRef.current });
-        setMap(map);
+        setMap(new Map({ ref: mapRef.current }));
     }, [mapRef]);
 
     useEffect(() => {
         if (!searchKeyword) return;
         const ps = new kakao.maps.services.Places();
-        ps.keywordSearch(searchKeyword, placesSearchCB);
-
-        function placesSearchCB(data, status, pagination) {
+        const options = {
+            category_group_code: "FD6",
+            bounds: map.bounds,
+        };
+        const searchPlace = (data, status) => {
             if (status === kakao.maps.services.Status.OK) {
                 for (let i = 0; i < data.length; i++) {
                     const position = new kakao.maps.LatLng(data[i].y, data[i].x);
@@ -43,7 +44,9 @@ const PlaceListMap = () => {
                     });
                 }
             }
-        }
+        };
+
+        ps.keywordSearch(searchKeyword, searchPlace, options);
     }, [map, searchKeyword]);
 
     return <MapContainer ref={mapRef} />;
