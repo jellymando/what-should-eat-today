@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React, { useRef, useState, useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import mongoose from "mongoose";
 import Map from "lib/Map";
 import { searchKeywordState, selectedPlaceState } from "store/atom";
 import { MapContainer } from "./styled";
@@ -14,7 +13,6 @@ const PlaceListMap = () => {
 
     const handleClickTarget = ({ placeName, position }) => {
         setSelectedPlace({
-            _id: new mongoose.Types.ObjectId(),
             name: placeName,
             x: parseFloat(position.La),
             y: parseFloat(position.Ma),
@@ -41,6 +39,7 @@ const PlaceListMap = () => {
                         placeName: data[i].place_name,
                         position,
                         handleClickTarget,
+                        isDisplay: i === 0,
                     });
                 }
             }

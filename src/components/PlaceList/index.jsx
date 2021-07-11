@@ -6,14 +6,9 @@ import { PlaceListWrap, List } from "./styled";
 const PlaceList = () => {
     const placeList = useRecoilValue(placeListSelector);
 
-    useEffect(() => {
-        console.log("placeList", placeList);
-    }, [placeList]);
-
     return (
         <PlaceListWrap>
             {placeList.map((place) => {
-                console.log(place);
                 return <List key={place._id}>{place.name}</List>;
             })}
         </PlaceListWrap>

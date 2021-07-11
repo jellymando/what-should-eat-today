@@ -15,7 +15,7 @@ export default class Map {
         this.markerImg = MAP.MARKER_IMG;
         this.markerSize = new kakao.maps.Size(...MAP.MARKER_SIZE);
         this.markerImage = new kakao.maps.MarkerImage(this.markerImg, this.markerSize);
-        this.$map.addControl(this.zoomControl, kakao.maps.ControlPosition.BOTTOMLEFT);
+        this.$map.addControl(this.zoomControl, kakao.maps.ControlPosition.TOPLEFT);
     }
 
     displayInfoWindow({ placeName, marker }) {
@@ -23,7 +23,7 @@ export default class Map {
         this.infowindow.open(this.$map, marker);
     }
 
-    displayMarker({ placeName, position, handleClickTarget }) {
+    displayMarker({ placeName, position, handleClickTarget, isDisplay }) {
         const marker = new kakao.maps.Marker({
             map: this.$map,
             position: position,
@@ -33,10 +33,12 @@ export default class Map {
 
         kakao.maps.event.addListener(marker, "click", () => {
             this.displayInfoWindow({ placeName, marker });
-
-            if (handleClickTarget) {
-                handleClickTarget({ placeName, position });
-            }
+            handleClickTarget({ placeName, position });
         });
+
+        if (isDisplay) {
+            handleClickTarget({ placeName, position });
+            this.displayInfoWindow({ placeName, marker });
+        }
     }
 }
