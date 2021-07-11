@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRecoilValue } from "recoil";
 import { placeListSelector } from "store/selector";
 import { PlaceListWrap, List } from "./styled";
@@ -8,9 +8,10 @@ const PlaceList = () => {
 
     return (
         <PlaceListWrap>
-            {placeList.map((place) => {
-                return <List key={place._id}>{place.name}</List>;
-            })}
+            {placeList &&
+                placeList.map((place) => {
+                    return <List key={place._id}>{place.name}</List>;
+                })}
         </PlaceListWrap>
     );
 };

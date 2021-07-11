@@ -1,16 +1,22 @@
 import React, { useState } from "react";
-import { useRecoilValue } from "recoil";
-import { selectedPlaceState } from "store/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { selectedPlaceState, searchKeywordState } from "store/atom";
 import { addPlace } from "api/place";
 import PlaceList from "components/PlaceList";
 import PlaceListMap from "components/PlaceListMap";
 import SearchBox from "components/SearchBox";
 import ButtonBox from "components/ButtonBox";
-import { SideButton } from "./styled";
+import KeywordBox from "components/KeywordBox";
+import { Container, SideButton } from "./styled";
 
 const Place = () => {
     const [isAddPlace, setIsAddPlace] = useState(false);
     const selectedPlace = useRecoilValue(selectedPlaceState);
+    const setSearchKeyword = useSetRecoilState(searchKeywordState);
+
+    const searchButtonHandler = (value) => {
+        setSearchKeyword(value);
+    };
 
     const addPlaceButtonHandler = async () => {
         const { success, err } = await addPlace(selectedPlace);
@@ -27,9 +33,12 @@ const Place = () => {
         <>
             {isAddPlace ? (
                 <>
-                    <SearchBox />
-                    <PlaceListMap />
-                    <ButtonBox handleButtonClick={addPlaceButtonHandler} />
+                    <Container>
+                        <SearchBox handleClickButton={searchButtonHandler} />
+                        <PlaceListMap />
+                        {selectedPlace && <KeywordBox />}
+                    </Container>
+                    <ButtonBox handleClickButton={addPlaceButtonHandler} />
                 </>
             ) : (
                 <PlaceList />
