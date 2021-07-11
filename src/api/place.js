@@ -20,14 +20,9 @@ export const addPlace = async (place) => {
                 x: place.x,
                 y: place.y,
             },
+            keywords: place.keywords,
         });
-        if (!success) {
-            switch (err.code) {
-                case 11000:
-                    alert("이미 등록된 음식점입니다.");
-                    break;
-            }
-        }
+        return { success, err };
     } catch (e) {
         console.log(e);
     }
