@@ -1,4 +1,5 @@
 import axios from "axios";
+import mongoose from "mongoose";
 
 export const getPlaces = async () => {
     try {
@@ -14,7 +15,7 @@ export const addPlace = async (place) => {
         const {
             data: { success, err },
         } = await axios.post("/places", {
-            _id: place._id,
+            _id: new mongoose.Types.ObjectId(),
             name: place.name,
             latlng: {
                 x: place.x,
