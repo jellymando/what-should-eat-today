@@ -1,19 +1,18 @@
-import React, { useRef, useCallback } from "react";
+import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { keywordSelector } from "store/selector";
 import { addedKeywordState } from "store/atom";
-import { addKeyword } from "api/keyword";
+import { addKeyword, deleteKeyword } from "api/keyword";
 import InputButtonBox from "components/InputButtonBox";
-import { Container, KeywordWrap, Keyword } from "./styled";
+import KeywordItem from "components/KeywordItem";
+import { Container, KeywordWrap } from "./styled";
 
 const KeywordBox = () => {
-    const inputRef = useRef(null);
     const keywordList = useRecoilValue(keywordSelector);
     const addedKeyword = useSetRecoilState(addedKeywordState);
 
-    const addKeywordHandler = useCallback(async () => {
-        if (!inputRef.current) return;
-        const { success, err } = await addKeyword({ title: inputRef.current.value });
+    const addKeywordHandler = async (value) => {
+        const { success, err } = await addKeyword({ title: value });
         if (!success) {
             switch (err.code) {
                 case 11000:
@@ -21,9 +20,9 @@ const KeywordBox = () => {
                     break;
             }
         } else {
-            addedKeyword(inputRef.current.value);
+            addedKeyword(value);
         }
-    }, [inputRef.current]);
+    };
 
     return (
         <Container>
@@ -31,7 +30,7 @@ const KeywordBox = () => {
             <KeywordWrap>
                 {keywordList &&
                     keywordList.map((keyword) => {
-                        return <Keyword key={keyword._id}>{keyword.title}</Keyword>;
+                        return <KeywordItem key={keyword._id} id={keyword._id} title={keyword.title} />;
                     })}
             </KeywordWrap>
         </Container>
