@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { selectedPlaceState, searchKeywordState } from "store/atom";
+import { useSetRecoilState, useRecoilState } from "recoil";
+import { selectedPlaceState, searchKeywordState, selectedKeywordsState } from "store/atom";
+import { placeListSelector } from "store/selector";
 import { addPlace } from "api/place";
 import PlaceList from "components/PlaceList";
 import PlaceListMap from "components/PlaceListMap";
@@ -11,21 +12,27 @@ import { Container, SideButton } from "./styled";
 
 const Place = () => {
     const [isAddPlace, setIsAddPlace] = useState(false);
-    const selectedPlace = useRecoilValue(selectedPlaceState);
+    const [selectedPlace, setSelectedPlace] = useRecoilState(selectedPlaceState);
     const setSearchKeyword = useSetRecoilState(searchKeywordState);
+    const [selectedKeywords, setSelectedKeywords] = useRecoilState(selectedKeywordsState);
+    const setPlaceList = useSetRecoilState(placeListSelector);
 
     const searchButtonHandler = (value) => {
         setSearchKeyword(value);
     };
 
     const addPlaceButtonHandler = async () => {
-        const { success, err } = await addPlace(selectedPlace);
+        const { success, err } = await addPlace({ ...selectedPlace, keywords: selectedKeywords });
         if (!success) {
             switch (err.code) {
                 case 11000:
                     alert("이미 등록된 음식점입니다.");
                     break;
             }
+        } else {
+            setPlaceList();
+            setSelectedPlace("");
+            setSelectedKeywords([]);
         }
     };
 
@@ -38,7 +45,7 @@ const Place = () => {
                         <PlaceListMap />
                         {selectedPlace && <KeywordBox />}
                     </Container>
-                    <ButtonBox handleClickButton={addPlaceButtonHandler} />
+                    <ButtonBox buttonText="밥집 추가" handleClickButton={addPlaceButtonHandler} />
                 </>
             ) : (
                 <PlaceList />
