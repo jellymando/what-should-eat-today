@@ -23,3 +23,14 @@ export const addKeyword = async (keyword) => {
         console.log(e);
     }
 };
+
+export const deleteKeyword = async (id) => {
+    try {
+        const {
+            data: { success, err },
+        } = await axios.delete(`/keywords/${id}`);
+        return { success, err };
+    } catch (e) {
+        console.log(e);
+    }
+};
