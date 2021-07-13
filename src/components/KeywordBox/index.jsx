@@ -1,5 +1,6 @@
 import React from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { addKeywordQueryState } from "store/atom";
 import { keywordListSelector } from "store/selector";
 import { addKeyword } from "api/keyword";
 import InputButtonBox from "components/InputButtonBox";
@@ -7,7 +8,8 @@ import KeywordItem from "components/KeywordItem";
 import { Container, KeywordWrap } from "./styled";
 
 const KeywordBox = () => {
-    const [keywordList, setKeywordList] = useRecoilState(keywordListSelector);
+    const keywordList = useRecoilValue(keywordListSelector);
+    const setAddKeywordQuery = useSetRecoilState(addKeywordQueryState);
 
     const addKeywordHandler = async (value) => {
         const { success, err } = await addKeyword({ title: value });
@@ -18,7 +20,7 @@ const KeywordBox = () => {
                     break;
             }
         } else {
-            setKeywordList();
+            setAddKeywordQuery(value);
         }
     };
 

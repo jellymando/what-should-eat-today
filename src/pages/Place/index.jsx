@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSetRecoilState, useRecoilState } from "recoil";
-import { selectedPlaceState, searchKeywordState, selectedKeywordsState } from "store/atom";
-import { placeListSelector } from "store/selector";
+import { addPlaceQueryState, selectedPlaceState, searchKeywordState, selectedKeywordsState } from "store/atom";
 import { addPlace } from "api/place";
 import PlaceList from "components/PlaceList";
 import PlaceListMap from "components/PlaceListMap";
@@ -15,7 +14,7 @@ const Place = () => {
     const [selectedPlace, setSelectedPlace] = useRecoilState(selectedPlaceState);
     const setSearchKeyword = useSetRecoilState(searchKeywordState);
     const [selectedKeywords, setSelectedKeywords] = useRecoilState(selectedKeywordsState);
-    const setPlaceList = useSetRecoilState(placeListSelector);
+    const setAddPlaceQuery = useSetRecoilState(addPlaceQueryState);
 
     const searchButtonHandler = (value) => {
         setSearchKeyword(value);
@@ -30,9 +29,9 @@ const Place = () => {
                     break;
             }
         } else {
-            setPlaceList();
             setSelectedPlace("");
             setSelectedKeywords([]);
+            setAddPlaceQuery(selectedPlace._id);
         }
     };
 

@@ -1,26 +1,20 @@
 import { selector } from "recoil";
-import { placeListState, keywordListState } from "./atom";
+import { addPlaceQueryState, addKeywordQueryState } from "./atom";
 import { getPlaces } from "api/place";
 import { getKeywords } from "api/keyword";
 
 export const placeListSelector = selector({
     key: "placeListSelector",
     get: async ({ get }) => {
-        get(placeListState);
+        get(addPlaceQueryState);
         return await getPlaces();
-    },
-    set: ({ set }) => {
-        set(placeListState, getPlaces());
     },
 });
 
 export const keywordListSelector = selector({
     key: "keywordListSelector",
     get: async ({ get }) => {
-        get(keywordListState);
+        get(addKeywordQueryState);
         return await getKeywords();
-    },
-    set: ({ set }) => {
-        set(keywordListState, getKeywords());
     },
 });

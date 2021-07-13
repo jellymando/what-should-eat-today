@@ -1,8 +1,8 @@
 import { atom } from "recoil";
 
-export const placeListState = atom({
-    key: "placeListState",
-    default: [],
+export const addPlaceQueryState = atom({
+    key: "addPlaceQueryState",
+    default: "",
 });
 
 export const selectedPlaceState = atom({
@@ -15,8 +15,8 @@ export const searchKeywordState = atom({
     default: "",
 });
 
-export const keywordListState = atom({
-    key: "keywordListState",
+export const addKeywordQueryState = atom({
+    key: "addKeywordQueryState",
     default: "",
 });
 
