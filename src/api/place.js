@@ -28,3 +28,14 @@ export const addPlace = async (place) => {
         console.log(e);
     }
 };
+
+export const deletePlace = async (id) => {
+    try {
+        const {
+            data: { success, err },
+        } = await axios.delete(`/places/${id}`);
+        return { success, err };
+    } catch (e) {
+        console.log(e);
+    }
+};

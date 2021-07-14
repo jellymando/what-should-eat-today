@@ -19,10 +19,10 @@ module.exports = function (app) {
         });
     });
 
-    app.delete("/places/:id", (req, res) => {
-        Place.deleteOne({ id: req.params.id }, (err, data) => {
+    app.delete("/places/:_id", (req, res) => {
+        Place.deleteOne({ _id: req.params._id }, (err, data) => {
             if (err) return res.json({ success: false, err });
-            res.json(data);
+            res.status(200).json({ success: true });
         });
     });
 
