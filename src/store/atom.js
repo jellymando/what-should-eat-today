@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
-export const addPlaceQueryState = atom({
-    key: "addPlaceQueryState",
+export const placesQueryState = atom({
+    key: "placesQueryState",
     default: "",
 });
 
@@ -15,8 +15,8 @@ export const searchKeywordState = atom({
     default: "",
 });
 
-export const addKeywordQueryState = atom({
-    key: "addKeywordQueryState",
+export const keywordsQueryState = atom({
+    key: "keywordsQueryState",
     default: "",
 });
 
