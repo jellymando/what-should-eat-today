@@ -10,13 +10,13 @@ export const getKeywords = async () => {
     }
 };
 
-export const addKeyword = async (keyword) => {
+export const addKeyword = async (title) => {
     try {
         const {
             data: { success, err },
         } = await axios.post("/keywords", {
             _id: new mongoose.Types.ObjectId(),
-            title: keyword.title,
+            title: title,
         });
         return { success, err };
     } catch (e) {
