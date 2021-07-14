@@ -4,6 +4,7 @@ import { COLOR, FONTSIZE } from "constants/style";
 export const PlaceListWrap = styled.div``;
 
 export const List = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,4 +28,17 @@ export const Keyword = styled.span`
     color: ${COLOR.GRAY1};
     font-size: ${FONTSIZE.SMALL};
     margin-right: 5px;
+`;
+
+export const TrashIcon = styled.span`
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+    background-size: 16px 16px;
+    background-image: url("/img/trash-icon.png");
+    opacity: 0.5;
+    cursor: pointer;
 `;

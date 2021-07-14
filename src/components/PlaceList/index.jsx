@@ -1,11 +1,20 @@
-import React, { useEffect } from "react";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import React from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { placesQueryState } from "store/atom";
 import { placeListSelector } from "store/selector";
-import { PlaceListWrap, List, Title, Content, Keyword } from "./styled";
+import { deletePlace } from "api/place";
+import { PlaceListWrap, List, Title, Content, Keyword, TrashIcon } from "./styled";
 
 const PlaceList = () => {
     const placeList = useRecoilValue(placeListSelector);
+    const setDeletePlaceQuery = useSetRecoilState(placesQueryState);
 
+    const deletePlaceHandler = async (id) => {
+        const { success, err } = await deletePlace(id);
+        if (success) {
+            setDeletePlaceQuery(id);
+        }
+    };
     return (
         <PlaceListWrap>
             {placeList &&
@@ -18,6 +27,7 @@ const PlaceList = () => {
                                     return <Keyword key={place._id}>{keyword}</Keyword>;
                                 })}
                             </Content>
+                            <TrashIcon onClick={() => deletePlaceHandler(place._id)} />
                         </List>
                     );
                 })}
