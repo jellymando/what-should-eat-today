@@ -3,6 +3,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { keywordsQueryState } from "store/atom";
 import { keywordListSelector } from "store/selector";
 import { addKeyword } from "api/keyword";
+import { MESSAGE } from "constants/message";
 import InputButtonBox from "components/InputButtonBox";
 import KeywordItem from "components/KeywordItem";
 import { Container, KeywordWrap } from "./styled";
@@ -13,12 +14,12 @@ const KeywordBox = () => {
 
     const addKeywordHandler = async (value) => {
         const title = value.trim();
-        if (!title.length > 0) return alert("키워드를 1글자 이상 입력해주세요.");
+        if (!title.length > 0) return alert(MESSAGE.KEYWORDS.ERROR.EMPTY);
         const { success, err } = await addKeyword(title);
         if (!success) {
             switch (err.code) {
                 case 11000:
-                    alert("이미 등록된 키워드입니다.");
+                    alert(MESSAGE.KEYWORDS.ERROR.EXIST);
                     break;
             }
         } else {
