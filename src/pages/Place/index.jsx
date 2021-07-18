@@ -8,10 +8,11 @@ import PlaceListMap from "components/PlaceListMap";
 import InputButtonBox from "components/InputButtonBox";
 import ButtonBox from "components/ButtonBox";
 import KeywordBox from "components/KeywordBox";
-import { Container, SideButton } from "./styled";
+import SideButton from "components/SideButton";
+import { Container } from "./styled";
 
 const Place = () => {
-    const [isAddPlace, setIsAddPlace] = useState(false);
+    const [isAddMode, setIsAddMode] = useState(false);
     const [selectedPlace, setSelectedPlace] = useRecoilState(selectedPlaceState);
     const setSearchKeyword = useSetRecoilState(searchKeywordState);
     const [selectedKeywords, setSelectedKeywords] = useRecoilState(selectedKeywordsState);
@@ -38,7 +39,7 @@ const Place = () => {
 
     return (
         <>
-            {isAddPlace ? (
+            {isAddMode ? (
                 <>
                     <Container>
                         <InputButtonBox buttonText="검색" handleClickButton={searchButtonHandler} />
@@ -50,7 +51,7 @@ const Place = () => {
             ) : (
                 <PlaceList />
             )}
-            <SideButton isAddPlace={isAddPlace} onClick={() => setIsAddPlace(!isAddPlace)} />
+            <SideButton isAddMode={isAddMode} handleClickButton={() => setIsAddMode(!isAddMode)} />
         </>
     );
 };
