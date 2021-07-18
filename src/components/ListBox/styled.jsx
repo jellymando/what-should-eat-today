@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLOR, FONTSIZE } from "constants/style";
 
-export const PlaceListWrap = styled.div``;
+export const ListWrap = styled.div``;
 
 export const List = styled.div`
     position: relative;

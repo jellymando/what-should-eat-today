@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useSetRecoilState, useRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 import { placesQueryState, selectedPlaceState, searchKeywordState, selectedKeywordsState } from "store/atom";
-import { addPlace } from "api/place";
+import { placeListSelector } from "store/selector";
+import { addPlace, deletePlace } from "api/place";
 import { MESSAGE } from "constants/message";
-import PlaceList from "components/PlaceList";
+import ListBox from "components/ListBox";
 import PlaceListMap from "components/PlaceListMap";
 import InputButtonBox from "components/InputButtonBox";
 import ButtonBox from "components/ButtonBox";
@@ -16,7 +17,8 @@ const Place = () => {
     const [selectedPlace, setSelectedPlace] = useRecoilState(selectedPlaceState);
     const setSearchKeyword = useSetRecoilState(searchKeywordState);
     const [selectedKeywords, setSelectedKeywords] = useRecoilState(selectedKeywordsState);
-    const setAddPlaceQuery = useSetRecoilState(placesQueryState);
+    const placeList = useRecoilValue(placeListSelector);
+    const setPlaceQuery = useSetRecoilState(placesQueryState);
 
     const searchButtonHandler = (value) => {
         setSearchKeyword(value);
@@ -33,7 +35,14 @@ const Place = () => {
         } else {
             setSelectedPlace("");
             setSelectedKeywords([]);
-            setAddPlaceQuery(selectedPlace._id);
+            setPlaceQuery(selectedPlace._id);
+        }
+    };
+
+    const deletePlaceButtonHandler = async (id) => {
+        const { success, err } = await deletePlace(id);
+        if (success) {
+            setPlaceQuery(id);
         }
     };
 
@@ -49,7 +58,7 @@ const Place = () => {
                     <ButtonBox buttonText="밥집 추가" handleClickButton={addPlaceButtonHandler} />
                 </>
             ) : (
-                <PlaceList />
+                <ListBox list={placeList} handleClickDeleteButton={deletePlaceButtonHandler} />
             )}
             <SideButton isAddMode={isAddMode} handleClickButton={() => setIsAddMode(!isAddMode)} />
         </>
