@@ -4,6 +4,7 @@ import { RecoilRoot } from "recoil";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Place from "./pages/Place";
+import Loader from "./components/Loader";
 
 function App() {
     return (
@@ -12,12 +13,12 @@ function App() {
                 <Header />
                 <Switch>
                     <Route exact path="/">
-                        <Suspense fallback={<></>}>
+                        <Suspense fallback={<Loader />}>
                             <Home />
                         </Suspense>
                     </Route>
                     <Route path="/place">
-                        <Suspense fallback={<></>}>
+                        <Suspense fallback={<Loader />}>
                             <Place />
                         </Suspense>
                     </Route>
