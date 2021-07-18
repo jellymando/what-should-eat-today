@@ -11,7 +11,9 @@ const KeywordBox = () => {
     const keywordList = useRecoilValue(keywordListSelector);
     const setAddKeywordQuery = useSetRecoilState(keywordsQueryState);
 
-    const addKeywordHandler = async (title) => {
+    const addKeywordHandler = async (value) => {
+        const title = value.trim();
+        if (!title.length > 0) return alert("키워드를 1글자 이상 입력해주세요.");
         const { success, err } = await addKeyword(title);
         if (!success) {
             switch (err.code) {
