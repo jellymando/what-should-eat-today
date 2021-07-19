@@ -12,7 +12,7 @@ export const Button = styled.div`
     background-size: 20px 20px;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: ${({ isAddMode }) => (isAddMode ? `url("/img/add-icon.png");` : `url("/img/list-icon.png");`)};
+    background-image: ${({ isAddMode }) => (isAddMode ? `url("/img/list-icon.png");` : `url("/img/add-icon.png");`)};
     z-index: 9;
     cursor: pointer;
 `;
