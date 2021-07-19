@@ -25,6 +25,7 @@ const Place = () => {
     };
 
     const addPlaceButtonHandler = async () => {
+        if (!selectedPlace) return alert(MESSAGE.PLACES.ERROR.EMPTY);
         const { success, err } = await addPlace({ ...selectedPlace, keywords: selectedKeywords });
         if (!success) {
             switch (err.code) {
