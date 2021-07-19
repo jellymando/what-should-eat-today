@@ -6,6 +6,7 @@ const memberSchema = new Schema({
     name: {
         type: String,
         required: true,
+        unique: true,
     },
     keywords: {
         type: [String],
