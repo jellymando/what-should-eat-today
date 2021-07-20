@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { isNavOpenState } from "store/atom";
 import NavBox from "components/NavBox";
@@ -11,7 +12,9 @@ const Header = () => {
         <>
             <HeaderWrap>
                 <MenuIcon onClick={() => setIsNavOpen(!isNavOpen)} />
-                <Logo />
+                <Link to="/">
+                    <Logo />
+                </Link>
             </HeaderWrap>
             {isNavOpen && <NavBox setIsNavOpen={setIsNavOpen} />}
         </>
