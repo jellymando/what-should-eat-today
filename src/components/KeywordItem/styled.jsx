@@ -25,5 +25,5 @@ export const TrashIcon = styled.span`
     width: 8px;
     height: 8px;
     background-size: 8px 8px;
-    background-image: url("/img/close-icon.png");
+    background-image: url("/img/keyword-delete-icon.png");
 `;
