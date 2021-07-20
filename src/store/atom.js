@@ -1,5 +1,10 @@
 import { atom } from "recoil";
 
+export const isNavOpenState = atom({
+    key: "isNavOpenState",
+    default: "",
+});
+
 export const membersQueryState = atom({
     key: "membersQueryState",
     default: "",
