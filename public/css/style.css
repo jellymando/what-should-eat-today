@@ -21,6 +21,7 @@ li {
 }
 
 #root {
+    position: relative;
     display: flex;
     flex-direction: column;
     max-width: 768px;
