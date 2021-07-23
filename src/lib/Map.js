@@ -33,11 +33,11 @@ export default class Map {
 
         kakao.maps.event.addListener(marker, "click", () => {
             this.displayInfoWindow({ placeName, marker });
-            handleClickTarget({ placeName, position });
+            if (handleClickTarget) handleClickTarget({ placeName, position });
         });
 
         if (isDisplay) {
-            handleClickTarget({ placeName, position });
+            if (handleClickTarget) handleClickTarget({ placeName, position });
             this.displayInfoWindow({ placeName, marker });
         }
     }
