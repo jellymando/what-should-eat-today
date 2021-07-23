@@ -25,7 +25,7 @@ const PlaceListMap = () => {
     }, [mapRef]);
 
     useEffect(() => {
-        if (!searchKeyword) return;
+        if (!map || !searchKeyword) return;
         const ps = new kakao.maps.services.Places();
         const options = {
             category_group_code: "FD6",

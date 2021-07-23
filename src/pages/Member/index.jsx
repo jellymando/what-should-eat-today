@@ -31,6 +31,7 @@ const Member = () => {
             inputRef.current.value = "";
             setSelectedKeywords([]);
             setMemberQuery(name);
+            setIsAddMode(false);
         }
     };
 

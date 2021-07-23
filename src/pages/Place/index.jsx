@@ -37,6 +37,7 @@ const Place = () => {
             setSelectedPlace("");
             setSelectedKeywords([]);
             setPlaceQuery(selectedPlace._id);
+            setIsAddMode(false);
         }
     };
 

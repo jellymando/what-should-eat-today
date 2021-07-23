@@ -17,6 +17,7 @@ export const MenuIcon = styled.div`
     background-size: 30px 30px;
     background-image: url("/img/menu-icon.png");
     opacity: 0.5;
+    cursor: pointer;
 `;
 
 export const Logo = styled.div`

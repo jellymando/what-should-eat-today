@@ -36,4 +36,5 @@ export const CloseIcon = styled.li`
     background-size: 28px 28px;
     background-image: url("/img/pop-close-icon.png");
     opacity: 0.7;
+    cursor: pointer;
 `;
