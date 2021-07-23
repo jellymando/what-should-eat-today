@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { selectedKeywordsState } from "store/atom";
-import { keywordListSelector } from "store/selector";
+import { selectedKeywordsState, keywordsQueryState } from "store/atom";
 import { deleteKeyword } from "api/keyword";
 import { Keyword, Text, TrashIcon } from "./styled";
 
 const KeywordItem = ({ id, title }) => {
     const [isSelected, setIsSelected] = useState(false);
     const [selectedKeywords, setSelectedKeywords] = useRecoilState(selectedKeywordsState);
-    const setKeywordList = useSetRecoilState(keywordListSelector);
+    const setAddKeywordQuery = useSetRecoilState(keywordsQueryState);
 
     const selectKeywordHandler = (title) => {
         setIsSelected(!isSelected);
@@ -17,7 +16,7 @@ const KeywordItem = ({ id, title }) => {
 
     const deleteKeywordHandler = async () => {
         const { success, err } = await deleteKeyword(id);
-        if (success) setKeywordList();
+        if (success) setAddKeywordQuery(title);
     };
 
     return (
