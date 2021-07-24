@@ -1,18 +1,23 @@
 import React from "react";
-import { ListWrap, List, Title, Content, Keyword, TrashIcon } from "./styled";
+import { ListWrap, List, Image, Title, Content, KeywordWrap, Keyword, TrashIcon } from "./styled";
 
-const ListBox = ({ list, handleClickDeleteButton }) => {
+const ListBox = ({ list, handleClickDeleteButton, hasImage }) => {
     return (
         <ListWrap>
             {list &&
                 list.map((item) => {
                     return (
                         <List key={item._id}>
-                            <Title>{item.name}</Title>
+                            {hasImage && <Image imageUrl={item.profileImage} />}
                             <Content>
-                                {item.keywords.map((keyword) => {
-                                    return <Keyword key={item._id}>{keyword}</Keyword>;
-                                })}
+                                <Title>{item.name}</Title>
+                                {item.keywords && (
+                                    <KeywordWrap>
+                                        {item.keywords.map((keyword) => {
+                                            return <Keyword key={item._id}>{keyword}</Keyword>;
+                                        })}
+                                    </KeywordWrap>
+                                )}
                             </Content>
                             <TrashIcon onClick={() => handleClickDeleteButton(item._id)} />
                         </List>
