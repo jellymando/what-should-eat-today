@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import { SearchWrap, SearchInput, SearchButton } from "./styled";
 
-const InputButtonBox = ({ buttonText, handleClickButton }) => {
+const InputButtonBox = ({ buttonText, handleClickButton, focus }) => {
     const searchInputRef = useRef(null);
 
     useEffect(() => {
-        if (!searchInputRef.current) return;
+        if (!searchInputRef.current || !focus) return;
         searchInputRef.current.focus();
     }, [searchInputRef]);
 

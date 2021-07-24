@@ -29,7 +29,7 @@ const KeywordBox = () => {
 
     return (
         <Container>
-            <InputButtonBox buttonText="추가" handleClickButton={addKeywordHandler} />
+            <InputButtonBox buttonText="추가" handleClickButton={addKeywordHandler} focus={false} />
             <KeywordWrap>
                 {keywordList &&
                     keywordList.map((keyword) => {
