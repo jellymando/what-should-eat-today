@@ -19,8 +19,8 @@ const Member = () => {
     const urlInputRef = useRef(null);
     const memberList = useRecoilValue(memberListSelector);
     const setMemberQuery = useSetRecoilState(membersQueryState);
-    const [imageUrl, setImageUrl] = useState("");
     const [isOpenModal, setIsOpenModal] = useRecoilState(isModalOpenState);
+    const [imageUrl, setImageUrl] = useState("");
     const [isErrorMsg, setIsErrorMsg] = useState(false);
 
     const addProfileImage = () => {
@@ -46,8 +46,6 @@ const Member = () => {
                     break;
             }
         } else {
-            nameInputRef.current.value = "";
-            setSelectedKeywords([]);
             setMemberQuery(name);
             setIsAddMode(false);
         }
@@ -59,8 +57,13 @@ const Member = () => {
     };
 
     useEffect(() => {
-        if (nameInputRef.current) nameInputRef.current.focus();
-    }, [isAddMode, nameInputRef, KeywordBox]);
+        if (isAddMode) {
+            if (nameInputRef.current) nameInputRef.current.focus();
+        } else {
+            setImageUrl("");
+            setSelectedKeywords([]);
+        }
+    }, [isAddMode]);
 
     useEffect(() => {
         if (isOpenModal && urlInputRef.current) urlInputRef.current.focus();
@@ -87,7 +90,7 @@ const Member = () => {
                     <ButtonBox buttonText="멤버 추가" handleClickButton={addMemberButtonHandler} />
                 </Container>
             ) : (
-                <ListBox list={memberList} handleClickDeleteButton={deleteMemberButtonHandler} />
+                <ListBox list={memberList} handleClickDeleteButton={deleteMemberButtonHandler} hasImage={true} />
             )}
             <SideButton isAddMode={isAddMode} handleClickButton={() => setIsAddMode(!isAddMode)} />
             {isOpenModal && (
