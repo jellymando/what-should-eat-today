@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { isModalOpenState } from "store/atom";
-import { Container, ModalWrap, Content, ButtonWrap, Button } from "./styled";
+import { Container, ModalWrap, Content, Title, Input, ErrorMsg, ButtonWrap, Button } from "./styled";
 
-const Modal = ({ contents, handleClickSubmitButton }) => {
+const Modal = ({ title, inputRef, isErrorMsg, errorMsg, handleClickSubmitButton }) => {
     const modalRef = useRef(null);
     const setIsOpenModal = useSetRecoilState(isModalOpenState);
 
@@ -22,7 +22,11 @@ const Modal = ({ contents, handleClickSubmitButton }) => {
     return (
         <Container ref={modalRef}>
             <ModalWrap>
-                <Content>{contents}</Content>
+                <Content>
+                    {title && <Title>{title}</Title>}
+                    {inputRef && <Input ref={inputRef} />}
+                    {isErrorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
+                </Content>
                 <ButtonWrap>
                     {handleClickSubmitButton && (
                         <Button isSubmit={true} onClick={() => handleClickSubmitButton()}>

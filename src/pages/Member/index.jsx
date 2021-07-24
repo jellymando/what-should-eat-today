@@ -10,7 +10,7 @@ import KeywordBox from "components/KeywordBox";
 import SideButton from "components/SideButton";
 import ModalPortal from "components/ModalPortal";
 import Modal from "components/Modal";
-import { Container, Form, List, Title, Input, Profile, ErrorMsg } from "./styled";
+import { Container, Form, List, Title, Input, Profile } from "./styled";
 
 const Member = () => {
     const [isAddMode, setIsAddMode] = useState(false);
@@ -67,6 +67,7 @@ const Member = () => {
 
     useEffect(() => {
         if (isOpenModal && urlInputRef.current) urlInputRef.current.focus();
+        if (!isOpenModal) setIsErrorMsg(false);
     }, [isOpenModal]);
 
     return (
@@ -96,13 +97,10 @@ const Member = () => {
             {isOpenModal && (
                 <ModalPortal>
                     <Modal
-                        contents={
-                            <>
-                                <Title>이미지 URL</Title>
-                                <Input ref={urlInputRef} />
-                                {isErrorMsg && <ErrorMsg>URL 형식을 확인해주세요.</ErrorMsg>}
-                            </>
-                        }
+                        title="이미지 URL"
+                        inputRef={urlInputRef}
+                        isErrorMsg={isErrorMsg}
+                        errorMsg="URL 형식을 확인해주세요."
                         handleClickSubmitButton={addProfileImage}
                     />
                 </ModalPortal>

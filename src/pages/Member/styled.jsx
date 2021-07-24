@@ -39,9 +39,3 @@ export const Profile = styled.div`
         ${COLOR.GRAY2};
     cursor: pointer;
 `;
-
-export const ErrorMsg = styled.p`
-    font-size: 12px;
-    color: ${COLOR.ORANGE1};
-    margin-top: 5px;
-`;

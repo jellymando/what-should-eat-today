@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLOR } from "constants/style";
+import { COLOR, FONTSIZE } from "constants/style";
 
 export const Container = styled.div`
     position: fixed;
@@ -26,6 +26,29 @@ export const ModalWrap = styled.div`
 export const Content = styled.div`
     font-size: 14px;
     color: ${COLOR.BLACK1};
+`;
+
+export const Title = styled.h2`
+    font-size: 16px;
+    font-weight: 700;
+    color: ${COLOR.ORANGE2};
+    margin-bottom: 10px;
+`;
+
+export const Input = styled.input`
+    width: 100%;
+    color: ${COLOR.BLACK2};
+    font-size: ${FONTSIZE.LARGE};
+    padding: 7px 10px;
+    border: 1px solid ${COLOR.GRAY1};
+    border-radius: 5px;
+    outline: none;
+`;
+
+export const ErrorMsg = styled.p`
+    font-size: 12px;
+    color: ${COLOR.ORANGE1};
+    margin-top: 5px;
 `;
 
 export const ButtonWrap = styled.div`
