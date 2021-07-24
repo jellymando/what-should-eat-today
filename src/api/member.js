@@ -17,6 +17,7 @@ export const addMember = async (member) => {
             data: { success, err },
         } = await axios.post(URI.MEMBERS, {
             _id: new mongoose.Types.ObjectId(),
+            profileImage: member.profileImage,
             name: member.name,
             keywords: member.keywords,
         });
