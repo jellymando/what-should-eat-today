@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
-import { selectedKeywordsState, membersQueryState } from "store/atom";
+import { selectedKeywordsState, membersQueryState, isModalOpenState } from "store/atom";
 import { memberListSelector } from "store/selector";
 import { addMember, deleteMember } from "api/member";
 import { MESSAGE } from "constants/message";
@@ -8,19 +8,37 @@ import ListBox from "components/ListBox";
 import ButtonBox from "components/ButtonBox";
 import KeywordBox from "components/KeywordBox";
 import SideButton from "components/SideButton";
-import { Container, Form, List, Title, Input } from "./styled";
+import ModalPortal from "components/ModalPortal";
+import Modal from "components/Modal";
+import { Container, Form, List, Title, Input, Profile, ErrorMsg } from "./styled";
 
 const Member = () => {
     const [isAddMode, setIsAddMode] = useState(false);
     const [selectedKeywords, setSelectedKeywords] = useRecoilState(selectedKeywordsState);
-    const inputRef = useRef(null);
+    const nameInputRef = useRef(null);
+    const urlInputRef = useRef(null);
     const memberList = useRecoilValue(memberListSelector);
     const setMemberQuery = useSetRecoilState(membersQueryState);
+    const [imageUrl, setImageUrl] = useState("");
+    const [isOpenModal, setIsOpenModal] = useRecoilState(isModalOpenState);
+    const [isErrorMsg, setIsErrorMsg] = useState(false);
+
+    const addProfileImage = () => {
+        const urlMatch = /(http(s)?:\/\/)([a-z0-9\w]+\.)+[a-z0-9]{2,4}(.*?)\.((jpe?|pn)g|gif)/gi.test(
+            urlInputRef.current.value
+        );
+        if (urlMatch) {
+            setImageUrl(urlInputRef.current.value);
+            setIsOpenModal(false);
+        } else {
+            setIsErrorMsg(true);
+        }
+    };
 
     const addMemberButtonHandler = async () => {
-        const name = inputRef.current.value.trim();
+        const name = nameInputRef.current.value.trim();
         if (!name.length > 0) return alert(MESSAGE.MEMBERS.ERROR.EMPTY);
-        const { success, err } = await addMember({ name, keywords: selectedKeywords });
+        const { success, err } = await addMember({ profileImage: imageUrl, name, keywords: selectedKeywords });
         if (!success) {
             switch (err.code) {
                 case 11000:
@@ -28,7 +46,7 @@ const Member = () => {
                     break;
             }
         } else {
-            inputRef.current.value = "";
+            nameInputRef.current.value = "";
             setSelectedKeywords([]);
             setMemberQuery(name);
             setIsAddMode(false);
@@ -37,14 +55,16 @@ const Member = () => {
 
     const deleteMemberButtonHandler = async (id) => {
         const { success, err } = await deleteMember(id);
-        if (success) {
-            setMemberQuery(id);
-        }
+        if (success) setMemberQuery(id);
     };
 
     useEffect(() => {
-        if (inputRef.current) inputRef.current.focus();
-    }, [isAddMode, inputRef, KeywordBox]);
+        if (nameInputRef.current) nameInputRef.current.focus();
+    }, [isAddMode, nameInputRef, KeywordBox]);
+
+    useEffect(() => {
+        if (isOpenModal && urlInputRef.current) urlInputRef.current.focus();
+    }, [isOpenModal]);
 
     return (
         <>
@@ -52,11 +72,15 @@ const Member = () => {
                 <Container>
                     <Form>
                         <List>
-                            <Title>나의 이름은</Title>
-                            <Input ref={inputRef} />
+                            <Title>프로필 사진</Title>
+                            <Profile imageUrl={imageUrl} onClick={() => setIsOpenModal(true)} />
                         </List>
                         <List>
-                            <Title>못 먹는 음식은</Title>
+                            <Title>이름</Title>
+                            <Input ref={nameInputRef} />
+                        </List>
+                        <List>
+                            <Title>못 먹는 음식</Title>
                             <KeywordBox />
                         </List>
                     </Form>
@@ -66,6 +90,20 @@ const Member = () => {
                 <ListBox list={memberList} handleClickDeleteButton={deleteMemberButtonHandler} />
             )}
             <SideButton isAddMode={isAddMode} handleClickButton={() => setIsAddMode(!isAddMode)} />
+            {isOpenModal && (
+                <ModalPortal>
+                    <Modal
+                        contents={
+                            <>
+                                <Title>이미지 URL</Title>
+                                <Input ref={urlInputRef} />
+                                {isErrorMsg && <ErrorMsg>URL 형식을 확인해주세요.</ErrorMsg>}
+                            </>
+                        }
+                        handleClickSubmitButton={addProfileImage}
+                    />
+                </ModalPortal>
+            )}
         </>
     );
 };

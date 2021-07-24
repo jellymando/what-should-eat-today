@@ -29,3 +29,19 @@ export const Input = styled.input`
     border-radius: 5px;
     outline: none;
 `;
+
+export const Profile = styled.div`
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    background: center / ${({ imageUrl }) => (imageUrl ? `70px url(${imageUrl})` : `40px url("/img/user-icon.png")`)}
+            no-repeat,
+        ${COLOR.GRAY2};
+    cursor: pointer;
+`;
+
+export const ErrorMsg = styled.p`
+    font-size: 12px;
+    color: ${COLOR.ORANGE1};
+    margin-top: 5px;
+`;
