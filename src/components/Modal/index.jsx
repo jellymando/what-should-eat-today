@@ -3,18 +3,18 @@ import { useSetRecoilState } from "recoil";
 import { isModalOpenState } from "store/atom";
 import { Container, ModalWrap, Content, Title, Input, ErrorMsg, ButtonWrap, Button } from "./styled";
 
-const Modal = ({ title, inputRef, isErrorMsg, errorMsg, handleClickSubmitButton }) => {
+const Modal = ({ title, inputRef, contents, isErrorMsg, errorMsg, handleClickSubmitButton }) => {
     const modalRef = useRef(null);
     const setIsOpenModal = useSetRecoilState(isModalOpenState);
 
     useEffect(() => {
         if (!modalRef.current) return;
-        document.addEventListener("click", function (e) {
-            if (e.target === modalRef.current) setIsOpenModal(false);
+        document.addEventListener("click", function ({ target }) {
+            if (target === modalRef.current) setIsOpenModal(false);
         });
         return () => {
-            document.removeEventListener("click", function (e) {
-                if (e.target === modalRef.current) setIsOpenModal(false);
+            document.removeEventListener("click", function ({ target }) {
+                if (target === modalRef.current) setIsOpenModal(false);
             });
         };
     }, [modalRef]);
@@ -25,6 +25,7 @@ const Modal = ({ title, inputRef, isErrorMsg, errorMsg, handleClickSubmitButton 
                 <Content>
                     {title && <Title>{title}</Title>}
                     {inputRef && <Input ref={inputRef} />}
+                    {contents && contents}
                     {isErrorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
                 </Content>
                 <ButtonWrap>

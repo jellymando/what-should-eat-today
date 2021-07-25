@@ -38,7 +38,7 @@ export const Title = styled.h2`
 export const Input = styled.input`
     width: 100%;
     color: ${COLOR.BLACK2};
-    font-size: ${FONTSIZE.LARGE};
+    font-size: ${FONTSIZE.MIDDLE};
     padding: 7px 10px;
     border: 1px solid ${COLOR.GRAY1};
     border-radius: 5px;
