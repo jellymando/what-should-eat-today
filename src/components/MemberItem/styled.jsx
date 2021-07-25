@@ -11,6 +11,7 @@ export const AddMember = styled.div`
 `;
 
 export const Member = styled.div`
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,6 +23,7 @@ export const Member = styled.div`
             no-repeat,
         ${COLOR.GRAY2};
     margin-right: 3px;
+    cursor: pointer;
 `;
 
 export const Name = styled.p`

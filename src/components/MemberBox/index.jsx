@@ -9,7 +9,7 @@ import { Container, MemberWrap, Input } from "./styled";
 
 const MemberBox = () => {
     const memberList = useRecoilValue(memberListSelector);
-    const selectedMembers = useRecoilValue(selectedMemberListSelector);
+    const [selectedMembers, setSelectedMembers] = useRecoilState(selectedMemberListSelector);
     const [filteredMembers, setFilteredMembers] = useState(memberList);
     const [isOpenModal, setIsOpenModal] = useRecoilState(isModalOpenState);
     const inputRef = useRef(null);
@@ -22,27 +22,19 @@ const MemberBox = () => {
         }, 300);
     };
 
-    const searchMemberForm = () => {
-        return (
-            <>
-                <Input ref={inputRef} onChange={(e) => searchMemberHandler(e)} />
-                <MemberWrap>
-                    {filteredMembers.length > 0 &&
-                        filteredMembers.map((member) => {
-                            return (
-                                <MemberItem
-                                    key={member._id}
-                                    profileImage={member.profileImage}
-                                    name={member.name}
-                                    selected={selectedMembers.find(
-                                        (selectedMember) => selectedMember.name === member.name
-                                    )}
-                                />
-                            );
-                        })}
-                </MemberWrap>
-            </>
-        );
+    const selectMemberHandler = ({ setIsSeleted, isSelected, name }) => {
+        setIsSeleted(!isSelected);
+        if (!isSelected) {
+            const selectedMember = memberList.filter((member) => member.name === name);
+            setSelectedMembers([...selectedMembers, ...selectedMember]);
+        } else {
+            unselectMemberHandler({ name });
+        }
+    };
+
+    const unselectMemberHandler = ({ name }) => {
+        const unselectedMembers = selectedMembers.filter((member) => member.name !== name);
+        setSelectedMembers([...unselectedMembers]);
     };
 
     useEffect(() => {
@@ -58,14 +50,42 @@ const MemberBox = () => {
                     {selectedMembers.length > 0 &&
                         selectedMembers.map((member) => {
                             return (
-                                <MemberItem key={member._id} profileImage={member.profileImage} name={member.name} />
+                                <MemberItem
+                                    key={member._id}
+                                    profileImage={member.profileImage}
+                                    name={member.name}
+                                    handleClickMember={unselectMemberHandler}
+                                />
                             );
                         })}
                 </MemberWrap>
             </Container>
             {isOpenModal && (
                 <ModalPortal>
-                    <Modal title="같이 밥먹을 파티원 추가" contents={searchMemberForm()} />
+                    <Modal
+                        title="같이 밥먹을 파티원 추가"
+                        contents={
+                            <>
+                                <Input ref={inputRef} onChange={(e) => searchMemberHandler(e)} />
+                                <MemberWrap>
+                                    {filteredMembers.length > 0 &&
+                                        filteredMembers.map((member) => {
+                                            return (
+                                                <MemberItem
+                                                    key={member._id}
+                                                    profileImage={member.profileImage}
+                                                    name={member.name}
+                                                    selected={selectedMembers.find(
+                                                        (selectedMember) => selectedMember.name === member.name
+                                                    )}
+                                                    handleClickMember={selectMemberHandler}
+                                                />
+                                            );
+                                        })}
+                                </MemberWrap>
+                            </>
+                        }
+                    />
                 </ModalPortal>
             )}
         </>

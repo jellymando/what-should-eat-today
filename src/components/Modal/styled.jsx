@@ -68,6 +68,7 @@ export const Button = styled.button`
     border-radius: 5px;
     padding: 5px;
     margin: 0 3px;
+    cursor: pointer;
 
     ${({ isSubmit }) => isSubmit && `background: ${COLOR.ORANGE2}`}
 `;
