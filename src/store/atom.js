@@ -10,6 +10,11 @@ export const membersQueryState = atom({
     default: "",
 });
 
+export const selectedMemberState = atom({
+    key: "selectedMemberState",
+    default: [],
+});
+
 export const placesQueryState = atom({
     key: "placesQueryState",
     default: "",

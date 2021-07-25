@@ -1,5 +1,5 @@
 import { selector } from "recoil";
-import { membersQueryState, placesQueryState, keywordsQueryState } from "./atom";
+import { membersQueryState, selectedMemberState, placesQueryState, keywordsQueryState } from "./atom";
 import { getMembers } from "api/member";
 import { getPlaces } from "api/place";
 import { getKeywords } from "api/keyword";
@@ -9,6 +9,19 @@ export const memberListSelector = selector({
     get: async ({ get }) => {
         get(membersQueryState);
         return await getMembers();
+    },
+});
+
+export const selectedMemberListSelector = selector({
+    key: "selectedMemberListSelector",
+    get: ({ get }) => {
+        get(selectedMemberState);
+        const localMembers = localStorage.getItem("selectedMembers");
+        return localMembers ? JSON.parse(localMembers) : [];
+    },
+    set: ({ set }, selectedMembers) => {
+        set(selectedMemberState, selectedMembers);
+        localStorage.setItem("selectedMembers", JSON.stringify(selectedMembers));
     },
 });
 
