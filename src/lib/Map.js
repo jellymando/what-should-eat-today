@@ -12,6 +12,7 @@ export default class Map {
         this.zoomControl = new kakao.maps.ZoomControl();
         this.bounds = this.$map.getBounds();
         this.infowindow = new kakao.maps.InfoWindow(MAP.INFO_WINDOW_STYLE);
+        this.markers = [];
         this.markerImg = MAP.MARKER_IMG;
         this.markerSize = new kakao.maps.Size(...MAP.MARKER_SIZE);
         this.markerImage = new kakao.maps.MarkerImage(this.markerImg, this.markerSize);
@@ -40,5 +41,14 @@ export default class Map {
             if (handleClickTarget) handleClickTarget({ placeName, position });
             this.displayInfoWindow({ placeName, marker });
         }
+
+        this.markers.push(marker);
+    }
+
+    closeInfoWindow() {
+        for (const marker of this.markers) {
+            marker.setMap(null);
+        }
+        this.markers = [];
     }
 }
