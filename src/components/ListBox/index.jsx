@@ -13,8 +13,8 @@ const ListBox = ({ list, handleClickDeleteButton, hasImage }) => {
                                 <Title>{item.name}</Title>
                                 {item.keywords && (
                                     <KeywordWrap>
-                                        {item.keywords.map((keyword) => {
-                                            return <Keyword key={item._id}>{keyword}</Keyword>;
+                                        {item.keywords.map((keyword, index) => {
+                                            return <Keyword key={`${item._id}_${index}`}>{keyword}</Keyword>;
                                         })}
                                     </KeywordWrap>
                                 )}
