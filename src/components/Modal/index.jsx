@@ -1,20 +1,27 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { isModalOpenState } from "store/atom";
 import { Container, ModalWrap, Content, Title, Input, ErrorMsg, ButtonWrap, Button } from "./styled";
 
-const Modal = ({ title, inputRef, contents, isErrorMsg, errorMsg, handleClickSubmitButton }) => {
+const Modal = ({
+    title,
+    inputRef,
+    contents,
+    isErrorMsg,
+    errorMsg,
+    handleClickSubmitButton,
+    handleClickCloseButton,
+}) => {
     const modalRef = useRef(null);
-    const setIsOpenModal = useSetRecoilState(isModalOpenState);
 
     useEffect(() => {
         if (!modalRef.current) return;
         document.addEventListener("click", function ({ target }) {
-            if (target === modalRef.current) setIsOpenModal(false);
+            if (target === modalRef.current) handleClickCloseButton();
         });
         return () => {
             document.removeEventListener("click", function ({ target }) {
-                if (target === modalRef.current) setIsOpenModal(false);
+                if (target === modalRef.current) handleClickCloseButton();
             });
         };
     }, [modalRef]);
@@ -30,11 +37,11 @@ const Modal = ({ title, inputRef, contents, isErrorMsg, errorMsg, handleClickSub
                 </Content>
                 <ButtonWrap>
                     {handleClickSubmitButton && (
-                        <Button isSubmit={true} onClick={() => handleClickSubmitButton()}>
+                        <Button isSubmit={true} onClick={handleClickSubmitButton}>
                             확인
                         </Button>
                     )}
-                    <Button onClick={() => setIsOpenModal(false)}>닫기</Button>
+                    <Button onClick={handleClickCloseButton}>닫기</Button>
                 </ButtonWrap>
             </ModalWrap>
         </Container>

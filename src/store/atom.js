@@ -39,8 +39,3 @@ export const selectedKeywordsState = atom({
     key: "selectedKeywordsState",
     default: [],
 });
-
-export const isModalOpenState = atom({
-    key: "isModalOpenState",
-    default: false,
-});

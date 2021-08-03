@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { isModalOpenState } from "store/atom";
 import { memberListSelector, selectedMemberListSelector } from "store/selector";
 import { AddMemberItem, MemberItem } from "components/MemberItem";
 import ModalPortal from "components/ModalPortal";
@@ -11,7 +10,7 @@ const MemberBox = () => {
     const memberList = useRecoilValue(memberListSelector);
     const [selectedMembers, setSelectedMembers] = useRecoilState(selectedMemberListSelector);
     const [filteredMembers, setFilteredMembers] = useState(memberList);
-    const [isOpenModal, setIsOpenModal] = useRecoilState(isModalOpenState);
+    const [isOpenModal, setIsOpenModal] = useState(false);
     const inputRef = useRef(null);
     const timerRef = useRef(0);
 
@@ -85,6 +84,7 @@ const MemberBox = () => {
                                 </MemberWrap>
                             </>
                         }
+                        handleClickCloseButton={() => setIsOpenModal(false)}
                     />
                 </ModalPortal>
             )}

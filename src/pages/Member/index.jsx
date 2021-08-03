@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
-import { selectedKeywordsState, membersQueryState, isModalOpenState } from "store/atom";
+import { selectedKeywordsState, membersQueryState } from "store/atom";
 import { memberListSelector } from "store/selector";
 import { addMember, deleteMember } from "api/member";
 import { MESSAGE } from "constants/message";
@@ -19,7 +19,7 @@ const Member = () => {
     const urlInputRef = useRef(null);
     const memberList = useRecoilValue(memberListSelector);
     const setMemberQuery = useSetRecoilState(membersQueryState);
-    const [isOpenModal, setIsOpenModal] = useRecoilState(isModalOpenState);
+    const [isOpenModal, setIsOpenModal] = useState(false);
     const [imageUrl, setImageUrl] = useState("");
     const [isErrorMsg, setIsErrorMsg] = useState(false);
 
@@ -101,7 +101,8 @@ const Member = () => {
                         inputRef={urlInputRef}
                         isErrorMsg={isErrorMsg}
                         errorMsg="URL 형식을 확인해주세요."
-                        handleClickSubmitButton={addProfileImage}
+                        handleClickSubmitButton={() => addProfileImage()}
+                        handleClickCloseButton={() => setIsOpenModal(false)}
                     />
                 </ModalPortal>
             )}
