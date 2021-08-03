@@ -26,6 +26,10 @@ export const ModalWrap = styled.div`
 export const Content = styled.div`
     font-size: 14px;
     color: ${COLOR.BLACK1};
+
+    img {
+        max-width: 100%;
+    }
 `;
 
 export const Title = styled.h2`
