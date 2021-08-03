@@ -10,10 +10,10 @@ const HomeMap = () => {
     const [map, setMap] = useState({});
     const placeList = useRecoilValue(placeListSelector);
     const selectedMembers = useRecoilValue(selectedMemberListSelector);
-    const selectedMembersKeywords = new Set();
     const [filteredPlaceList, setFilteredPlaceList] = useState([]);
 
     useEffect(() => {
+        const selectedMembersKeywords = new Set();
         selectedMembers.map((member) => member.keywords.forEach((keyword) => selectedMembersKeywords.add(keyword)));
         setFilteredPlaceList(
             placeList.filter((place) => {
