@@ -25,6 +25,11 @@ export const selectedPlaceState = atom({
     default: "",
 });
 
+export const filteredPlaceListState = atom({
+    key: "filteredPlaceListState",
+    default: [],
+});
+
 export const searchKeywordState = atom({
     key: "searchKeywordState",
     default: "",

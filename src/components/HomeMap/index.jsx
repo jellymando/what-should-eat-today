@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
 import React, { useRef, useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import Map from "lib/Map";
+import { filteredPlaceListState } from "store/atom";
 import { placeListSelector, selectedMemberListSelector } from "store/selector";
 import { MapContainer } from "./styled";
 
@@ -10,7 +11,7 @@ const HomeMap = () => {
     const [map, setMap] = useState({});
     const placeList = useRecoilValue(placeListSelector);
     const selectedMembers = useRecoilValue(selectedMemberListSelector);
-    const [filteredPlaceList, setFilteredPlaceList] = useState([]);
+    const [filteredPlaceList, setFilteredPlaceList] = useRecoilState(filteredPlaceListState);
 
     useEffect(() => {
         const selectedMembersKeywords = new Set();
