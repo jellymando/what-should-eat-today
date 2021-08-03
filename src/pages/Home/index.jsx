@@ -37,13 +37,14 @@ const Home = () => {
                         contents={
                             isLoading ? (
                                 <Loading>
-                                    <img src="/img/random-loading.gif" alt="로딩중.." />
-                                    <Text>랜덤으로 고르는 중입니다..</Text>
+                                    <img src="/img/random-loading.gif" alt="loading" />
+                                    <Text>랜덤 메뉴를 고르는 중입니다..</Text>
                                 </Loading>
                             ) : (
                                 <>
                                     <PlaceName>{randomPlace.name}</PlaceName>
                                     <Text>여기로 고고!</Text>
+                                    <Animation />
                                 </>
                             )
                         }
