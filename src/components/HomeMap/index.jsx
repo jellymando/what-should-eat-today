@@ -18,10 +18,14 @@ const HomeMap = () => {
         selectedMembers.map((member) => member.keywords.forEach((keyword) => selectedMembersKeywords.add(keyword)));
         setFilteredPlaceList(
             placeList.filter((place) => {
-                for (const keyword of place.keywords) {
-                    if (!selectedMembersKeywords.has(keyword)) {
-                        return true;
+                if (place.keywords.length > 0) {
+                    for (const keyword of place.keywords) {
+                        if (!selectedMembersKeywords.has(keyword)) {
+                            return true;
+                        }
                     }
+                } else {
+                    return true;
                 }
                 return false;
             })
