@@ -6,6 +6,7 @@ import Modal from "components/Modal";
 import HomeMap from "components/HomeMap";
 import MemberBox from "components/MemberBox";
 import ButtonBox from "components/ButtonBox";
+import RandomMap from "components/RandomMap";
 import Animation from "components/Anymation";
 import { Loading, Text, PlaceName } from "./styled";
 
@@ -14,11 +15,10 @@ const Home = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const filteredPlaceList = useRecoilValue(filteredPlaceListState);
-    const [randomPlace, setRandomPlace] = useState("");
+    const [randomPlace, setRandomPlace] = useState({});
 
     useEffect(() => {
         if (!isOpenModal) return;
-        if (!isLoading) setIsLoading(true);
         clearTimeout(timerRef.current);
         timerRef.current = setTimeout(() => {
             setIsLoading(false);
@@ -43,12 +43,16 @@ const Home = () => {
                             ) : (
                                 <>
                                     <PlaceName>{randomPlace.name}</PlaceName>
+                                    <RandomMap place={randomPlace} />
                                     <Text>여기로 고고!</Text>
                                     <Animation />
                                 </>
                             )
                         }
-                        handleClickCloseButton={() => setIsOpenModal(false)}
+                        handleClickCloseButton={() => {
+                            setIsOpenModal(false);
+                            setIsLoading(true);
+                        }}
                     />
                 </ModalPortal>
             )}

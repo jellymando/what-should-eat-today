@@ -8,7 +8,7 @@ export const Text = styled.p`
 `;
 
 export const Loading = styled.div`
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
     ${Text} {
         color: ${COLOR.ORANGE1};
@@ -22,7 +22,6 @@ export const PlaceName = styled.p`
     font-size: ${FONTSIZE.LARGE};
     font-weight: 700;
     text-align: center;
-    margin-bottom: 5px;
 
     &:before {
         content: "[";

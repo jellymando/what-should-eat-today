@@ -19,6 +19,10 @@ export default class Map {
         this.$map.addControl(this.zoomControl, kakao.maps.ControlPosition.TOPLEFT);
     }
 
+    setBounds(bounds) {
+        this.$map.setBounds(bounds);
+    }
+
     displayInfoWindow({ placeName, marker }) {
         this.infowindow.setContent('<div style="padding:5px;font-size:12px;">' + placeName + "</div>");
         this.infowindow.open(this.$map, marker);
