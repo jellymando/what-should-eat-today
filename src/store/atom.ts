@@ -1,8 +1,9 @@
 import { atom } from "recoil";
+import { MemberType, PlaceType, KeywordType } from "types";
 
 export const isNavOpenState = atom({
     key: "isNavOpenState",
-    default: "",
+    default: false,
 });
 
 export const membersQueryState = atom({
@@ -10,7 +11,7 @@ export const membersQueryState = atom({
     default: "",
 });
 
-export const selectedMemberState = atom({
+export const selectedMemberState = atom<MemberType[]>({
     key: "selectedMemberState",
     default: [],
 });
@@ -22,10 +23,17 @@ export const placesQueryState = atom({
 
 export const selectedPlaceState = atom({
     key: "selectedPlaceState",
-    default: "",
+    default: {
+        _id: "",
+        name: "",
+        latlng: {
+            x: 0,
+            y: 0,
+        },
+    },
 });
 
-export const filteredPlaceListState = atom({
+export const filteredPlaceListState = atom<PlaceType[]>({
     key: "filteredPlaceListState",
     default: [],
 });
@@ -40,7 +48,7 @@ export const keywordsQueryState = atom({
     default: "",
 });
 
-export const selectedKeywordsState = atom({
+export const selectedKeywordsState = atom<string[]>({
     key: "selectedKeywordsState",
     default: [],
 });

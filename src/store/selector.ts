@@ -1,5 +1,6 @@
 import { selector } from "recoil";
 import { membersQueryState, selectedMemberState, placesQueryState, keywordsQueryState } from "./atom";
+import { MemberType, PlaceType } from "types";
 import { getMembers } from "api/member";
 import { getPlaces } from "api/place";
 import { getKeywords } from "api/keyword";
@@ -12,7 +13,7 @@ export const memberListSelector = selector({
     },
 });
 
-export const selectedMemberListSelector = selector({
+export const selectedMemberListSelector = selector<MemberType[]>({
     key: "selectedMemberListSelector",
     get: ({ get }) => {
         get(selectedMemberState);
