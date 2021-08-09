@@ -1,6 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
-import { useSetRecoilState } from "recoil";
-import { isModalOpenState } from "store/atom";
+import React, { useRef, useEffect } from "react";
 import { Container, ModalWrap, Content, Title, Input, ErrorMsg, ButtonWrap, Button } from "./styled";
 
 const Modal = ({
@@ -11,6 +9,14 @@ const Modal = ({
     errorMsg,
     handleClickSubmitButton,
     handleClickCloseButton,
+}: {
+    title?: string;
+    inputRef?: React.RefObject<HTMLInputElement>;
+    contents?: JSX.Element;
+    isErrorMsg?: boolean;
+    errorMsg?: string;
+    handleClickSubmitButton?: () => void;
+    handleClickCloseButton: () => void;
 }) => {
     const modalRef = useRef(null);
 

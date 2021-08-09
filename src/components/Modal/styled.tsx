@@ -75,5 +75,5 @@ export const Button = styled.button`
     margin: 0 3px;
     cursor: pointer;
 
-    ${({ isSubmit }) => isSubmit && `background: ${COLOR.ORANGE2}`}
+    ${({ isSubmit }: { isSubmit?: boolean }) => isSubmit && `background: ${COLOR.ORANGE2}`}
 `;

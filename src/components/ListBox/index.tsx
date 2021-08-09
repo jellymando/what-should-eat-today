@@ -1,7 +1,16 @@
 import React from "react";
+import { KeywordType } from "types";
 import { ListWrap, List, Image, Title, Content, KeywordWrap, Keyword, TrashIcon } from "./styled";
 
-const ListBox = ({ list, handleClickDeleteButton, hasImage }) => {
+const ListBox = ({
+    list,
+    handleClickDeleteButton,
+    hasImage,
+}: {
+    list: any[];
+    handleClickDeleteButton: (id: string) => void;
+    hasImage?: boolean;
+}) => {
     return (
         <ListWrap>
             {list &&
@@ -13,7 +22,7 @@ const ListBox = ({ list, handleClickDeleteButton, hasImage }) => {
                                 <Title>{item.name}</Title>
                                 {item.keywords && (
                                     <KeywordWrap>
-                                        {item.keywords.map((keyword, index) => {
+                                        {item.keywords.map((keyword: KeywordType, index: number) => {
                                             return <Keyword key={`${item._id}_${index}`}>{keyword}</Keyword>;
                                         })}
                                     </KeywordWrap>

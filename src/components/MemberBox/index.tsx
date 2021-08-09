@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { memberListSelector, selectedMemberListSelector } from "store/selector";
+import { MemberType } from "types";
 import { AddMemberItem, MemberItem } from "components/MemberItem";
 import ModalPortal from "components/ModalPortal";
 import Modal from "components/Modal";
@@ -11,33 +12,41 @@ const MemberBox = () => {
     const [selectedMembers, setSelectedMembers] = useRecoilState(selectedMemberListSelector);
     const [filteredMembers, setFilteredMembers] = useState(memberList);
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const inputRef = useRef(null);
-    const timerRef = useRef(0);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const timerRef: { current: NodeJS.Timeout | null } = useRef(null);
 
-    const searchMemberHandler = ({ target }) => {
-        clearTimeout(timerRef.current);
+    const searchMemberHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+        if (timerRef.current) clearTimeout(timerRef.current);
         timerRef.current = setTimeout(() => {
-            setFilteredMembers(memberList.filter((member) => member.name.includes(target.value)));
+            setFilteredMembers(memberList.filter((member: MemberType) => member.name.includes(target?.value)));
         }, 300);
     };
 
-    const selectMemberHandler = ({ setIsSeleted, isSelected, name }) => {
+    const selectMemberHandler = ({
+        setIsSeleted,
+        isSelected,
+        name,
+    }: {
+        setIsSeleted: (isSelcted: boolean) => void;
+        isSelected: boolean;
+        name: string;
+    }) => {
         setIsSeleted(!isSelected);
         if (!isSelected) {
-            const selectedMember = memberList.filter((member) => member.name === name);
+            const selectedMember = memberList.filter((member: MemberType) => member.name === name);
             setSelectedMembers([...selectedMembers, ...selectedMember]);
         } else {
             unselectMemberHandler({ name });
         }
     };
 
-    const unselectMemberHandler = ({ name }) => {
+    const unselectMemberHandler = ({ name }: { name: string }) => {
         const unselectedMembers = selectedMembers.filter((member) => member.name !== name);
         setSelectedMembers([...unselectedMembers]);
     };
 
     useEffect(() => {
-        if (isOpenModal && inputRef.current) inputRef.current.focus();
+        if (isOpenModal && inputRef.current) inputRef.current!.focus();
         if (!isOpenModal) setFilteredMembers(memberList);
     }, [isOpenModal]);
 
@@ -68,15 +77,17 @@ const MemberBox = () => {
                                 <Input ref={inputRef} onChange={(e) => searchMemberHandler(e)} />
                                 <MemberWrap>
                                     {filteredMembers.length > 0 &&
-                                        filteredMembers.map((member) => {
+                                        filteredMembers.map((member: MemberType) => {
                                             return (
                                                 <MemberItem
                                                     key={member._id}
                                                     profileImage={member.profileImage}
                                                     name={member.name}
-                                                    selected={selectedMembers.find(
-                                                        (selectedMember) => selectedMember.name === member.name
-                                                    )}
+                                                    selected={
+                                                        !!selectedMembers.find(
+                                                            (selectedMember) => selectedMember.name === member.name
+                                                        )
+                                                    }
                                                     handleClickMember={selectMemberHandler}
                                                 />
                                             );

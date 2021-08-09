@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const bang = keyframes`
     from {
@@ -7,7 +7,7 @@ const bang = keyframes`
     }
 `;
 
-const random = (range) => {
+const random = (range: number) => {
     return Math.floor(Math.random() * range);
 };
 

@@ -16,7 +16,7 @@ const Header = () => {
                     <Logo />
                 </Link>
             </HeaderWrap>
-            {isNavOpen && <NavBox setIsNavOpen={setIsNavOpen} />}
+            {isNavOpen && <NavBox />}
         </>
     );
 };

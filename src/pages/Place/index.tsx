@@ -3,6 +3,7 @@ import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 import { placesQueryState, selectedPlaceState, searchKeywordState, selectedKeywordsState } from "store/atom";
 import { placeListSelector } from "store/selector";
 import { addPlace, deletePlace } from "api/place";
+import { PlaceType } from "types";
 import { MESSAGE } from "constants/message";
 import ListBox from "components/ListBox";
 import PlaceListMap from "components/PlaceListMap";
@@ -20,7 +21,7 @@ const Place = () => {
     const placeList = useRecoilValue(placeListSelector);
     const setPlaceQuery = useSetRecoilState(placesQueryState);
 
-    const searchButtonHandler = (value) => {
+    const searchButtonHandler = (value: string) => {
         setSearchKeyword(value);
     };
 
@@ -34,14 +35,21 @@ const Place = () => {
                     break;
             }
         } else {
-            setSelectedPlace("");
+            setSelectedPlace({
+                _id: "",
+                name: "",
+                latlng: {
+                    x: 0,
+                    y: 0,
+                },
+            });
             setSelectedKeywords([]);
             setPlaceQuery(selectedPlace._id);
             setIsAddMode(false);
         }
     };
 
-    const deletePlaceButtonHandler = async (id) => {
+    const deletePlaceButtonHandler = async (id: string) => {
         const { success, err } = await deletePlace(id);
         if (success) {
             setPlaceQuery(id);

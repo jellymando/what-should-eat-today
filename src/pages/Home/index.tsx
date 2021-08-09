@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { filteredPlaceListState } from "store/atom";
+import { PlaceType } from "types";
 import ModalPortal from "components/ModalPortal";
 import Modal from "components/Modal";
 import HomeMap from "components/HomeMap";
@@ -11,24 +12,29 @@ import Animation from "components/Anymation";
 import { Loading, Text, PlaceName } from "./styled";
 
 const Home = () => {
-    const timerRef = useRef(0);
+    const timerRef: { current: NodeJS.Timeout | null } = useRef(null);
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const filteredPlaceList = useRecoilValue(filteredPlaceListState);
-    const [randomPlace, setRandomPlace] = useState({});
+    const [randomPlace, setRandomPlace] = useState({} as PlaceType);
 
     useEffect(() => {
         if (!isOpenModal) return;
-        clearTimeout(timerRef.current);
+        if (timerRef.current) clearTimeout(timerRef.current);
         timerRef.current = setTimeout(() => {
-            setIsLoading(false);
             setRandomPlace(filteredPlaceList[Math.floor(Math.random() * filteredPlaceList.length)]);
+            setIsLoading(false);
         }, 4000);
     }, [isOpenModal]);
 
+    useEffect(() => {
+        console.log("filteredPlaceList", filteredPlaceList);
+        console.log("randomPlace", randomPlace);
+    }, [filteredPlaceList, randomPlace]);
+
     return (
         <>
-            <MemberBox isOpenHomeModal={isOpenModal} />
+            <MemberBox />
             <HomeMap />
             <ButtonBox buttonText="랜덤 메뉴" handleClickButton={() => setIsOpenModal(true)} />
             {isOpenModal && (

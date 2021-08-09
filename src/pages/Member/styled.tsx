@@ -34,7 +34,9 @@ export const Profile = styled.div`
     width: 70px;
     height: 70px;
     border-radius: 35px;
-    background: center / ${({ imageUrl }) => (imageUrl ? `70px url(${imageUrl})` : `40px url("/img/user-icon.png")`)}
+    background: center /
+            ${({ imageUrl }: { imageUrl: string }) =>
+                imageUrl ? `70px url(${imageUrl})` : `40px url("/img/user-icon.png")`}
             no-repeat,
         ${COLOR.GRAY2};
     cursor: pointer;

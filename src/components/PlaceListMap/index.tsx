@@ -7,35 +7,39 @@ import { MapContainer } from "./styled";
 
 const PlaceListMap = () => {
     const mapRef = useRef(null);
-    const [map, setMap] = useState({});
+    const [map, setMap] = useState(new Map());
     const searchKeyword = useRecoilValue(searchKeywordState);
     const setSelectedPlace = useSetRecoilState(selectedPlaceState);
 
-    const handleClickTarget = ({ placeName, position }) => {
+    const handleClickTarget = ({ _id, placeName, position }: { _id: string; placeName: string; position: any }) => {
         setSelectedPlace({
+            _id,
             name: placeName,
-            x: parseFloat(position.La),
-            y: parseFloat(position.Ma),
+            latlng: {
+                x: parseFloat(position.La),
+                y: parseFloat(position.Ma),
+            },
         });
     };
 
     useEffect(() => {
         if (!mapRef.current) return;
-        setMap(new Map({ ref: mapRef.current }));
+        map.setRef(mapRef.current!);
     }, [mapRef]);
 
     useEffect(() => {
         if (!map || !searchKeyword) return;
-        const ps = new kakao.maps.services.Places();
+        const ps = new window.kakao.maps.services.Places();
         const options = {
             category_group_code: "FD6",
             bounds: map.bounds,
         };
-        const searchPlace = (data, status) => {
-            if (status === kakao.maps.services.Status.OK) {
+        const searchPlace = (data: any, status: any) => {
+            if (status === window.kakao.maps.services.Status.OK) {
                 for (let i = 0; i < data.length; i++) {
-                    const position = new kakao.maps.LatLng(data[i].y, data[i].x);
+                    const position = new window.kakao.maps.LatLng(data[i].y, data[i].x);
                     map.displayMarker({
+                        _id: data[i]._id,
                         placeName: data[i].place_name,
                         position,
                         handleClickTarget,

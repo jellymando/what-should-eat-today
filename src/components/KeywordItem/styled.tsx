@@ -6,8 +6,8 @@ export const Keyword = styled.span`
     align-items: center;
     height: 30px;
     line-height: 1.7;
-    color: ${({ isSelected }) => (isSelected ? COLOR.ORANGE1 : COLOR.ORANGE2)};
-    border: 1px solid ${({ isSelected }) => (isSelected ? COLOR.ORANGE1 : COLOR.GRAY2)};
+    color: ${({ isSelected }: { isSelected: boolean }) => (isSelected ? COLOR.ORANGE1 : COLOR.ORANGE2)};
+    border: 1px solid ${({ isSelected }: { isSelected: boolean }) => (isSelected ? COLOR.ORANGE1 : COLOR.GRAY2)};
     border-radius: 5px;
     background: ${COLOR.WHITE};
     padding-right: 6px;

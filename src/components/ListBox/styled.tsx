@@ -16,7 +16,9 @@ export const Image = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 25px;
-    background: center / ${({ imageUrl }) => (imageUrl ? `50px url(${imageUrl})` : `30px url("/img/user-icon.png")`)}
+    background: center /
+            ${({ imageUrl }: { imageUrl: string }) =>
+                imageUrl ? `50px url(${imageUrl})` : `30px url("/img/user-icon.png")`}
             no-repeat,
         ${COLOR.GRAY2};
     margin-right: 10px;

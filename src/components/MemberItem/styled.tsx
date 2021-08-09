@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { COLOR } from "constants/style";
 
+type MemberProps = {
+    isSelected: boolean;
+    imageUrl: string;
+};
+
 export const AddMember = styled.div`
     width: 50px;
     height: 50px;
@@ -10,7 +15,7 @@ export const AddMember = styled.div`
     cursor: pointer;
 `;
 
-export const Member = styled.div`
+export const Member = styled.div<MemberProps>`
     position: relative;
     display: flex;
     align-items: center;

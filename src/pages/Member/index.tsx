@@ -15,8 +15,8 @@ import { Container, Form, List, Title, Input, Profile } from "./styled";
 const Member = () => {
     const [isAddMode, setIsAddMode] = useState(false);
     const [selectedKeywords, setSelectedKeywords] = useRecoilState(selectedKeywordsState);
-    const nameInputRef = useRef(null);
-    const urlInputRef = useRef(null);
+    const nameInputRef = useRef<HTMLInputElement>(null);
+    const urlInputRef = useRef<HTMLInputElement>(null);
     const memberList = useRecoilValue(memberListSelector);
     const setMemberQuery = useSetRecoilState(membersQueryState);
     const [isOpenModal, setIsOpenModal] = useState(false);
@@ -25,10 +25,10 @@ const Member = () => {
 
     const addProfileImage = () => {
         const urlMatch = /(http(s)?:\/\/)([a-z0-9\w]+\.)+[a-z0-9]{2,4}(.*?)\.((jpe?|pn)g|gif)/gi.test(
-            urlInputRef.current.value
+            urlInputRef.current!.value
         );
         if (urlMatch) {
-            setImageUrl(urlInputRef.current.value);
+            setImageUrl(urlInputRef.current!.value);
             setIsOpenModal(false);
         } else {
             setIsErrorMsg(true);
@@ -36,8 +36,8 @@ const Member = () => {
     };
 
     const addMemberButtonHandler = async () => {
-        const name = nameInputRef.current.value.trim();
-        if (!name.length > 0) return alert(MESSAGE.MEMBERS.ERROR.EMPTY);
+        const name = nameInputRef.current!.value.trim();
+        if (!(name.length > 0)) return alert(MESSAGE.MEMBERS.ERROR.EMPTY);
         const { success, err } = await addMember({ profileImage: imageUrl, name, keywords: selectedKeywords });
         if (!success) {
             switch (err.code) {
@@ -51,7 +51,7 @@ const Member = () => {
         }
     };
 
-    const deleteMemberButtonHandler = async (id) => {
+    const deleteMemberButtonHandler = async (id: string) => {
         const { success, err } = await deleteMember(id);
         if (success) setMemberQuery(id);
     };
