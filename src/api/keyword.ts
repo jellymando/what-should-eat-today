@@ -11,26 +11,22 @@ export const getKeywords = async () => {
     }
 };
 
-export const addKeyword = async (title) => {
+export const addKeyword = async (title: string) => {
     try {
-        const {
-            data: { success, err },
-        } = await axios.post(URI.KEYWORDS, {
+        const { data } = await axios.post(URI.KEYWORDS, {
             _id: new mongoose.Types.ObjectId(),
             title: title,
         });
-        return { success, err };
+        return data;
     } catch (e) {
         console.log(e);
     }
 };
 
-export const deleteKeyword = async (id) => {
+export const deleteKeyword = async (id: string) => {
     try {
-        const {
-            data: { success, err },
-        } = await axios.delete(`${URI.KEYWORDS}/${id}`);
-        return { success, err };
+        const { data } = await axios.delete(`${URI.KEYWORDS}/${id}`);
+        return data;
     } catch (e) {
         console.log(e);
     }

@@ -1,5 +1,6 @@
 import axios from "axios";
 import mongoose from "mongoose";
+import { PlaceType } from "types";
 import { URI } from "constants/uri";
 
 export const getPlaces = async () => {
@@ -11,31 +12,24 @@ export const getPlaces = async () => {
     }
 };
 
-export const addPlace = async (place) => {
+export const addPlace = async (place: PlaceType) => {
     try {
-        const {
-            data: { success, err },
-        } = await axios.post(URI.PLACES, {
+        const { data } = await axios.post(URI.PLACES, {
             _id: new mongoose.Types.ObjectId(),
             name: place.name,
-            latlng: {
-                x: place.x,
-                y: place.y,
-            },
+            latlng: place.latlng,
             keywords: place.keywords,
         });
-        return { success, err };
+        return data;
     } catch (e) {
         console.log(e);
     }
 };
 
-export const deletePlace = async (id) => {
+export const deletePlace = async (id: string) => {
     try {
-        const {
-            data: { success, err },
-        } = await axios.delete(`${URI.PLACES}/${id}`);
-        return { success, err };
+        const { data } = await axios.delete(`${URI.PLACES}/${id}`);
+        return data;
     } catch (e) {
         console.log(e);
     }

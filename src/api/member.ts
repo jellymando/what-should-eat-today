@@ -1,5 +1,6 @@
 import axios from "axios";
 import mongoose from "mongoose";
+import { MemberType } from "types";
 import { URI } from "constants/uri";
 
 export const getMembers = async () => {
@@ -11,28 +12,24 @@ export const getMembers = async () => {
     }
 };
 
-export const addMember = async (member) => {
+export const addMember = async (member: MemberType) => {
     try {
-        const {
-            data: { success, err },
-        } = await axios.post(URI.MEMBERS, {
+        const { data } = await axios.post(URI.MEMBERS, {
             _id: new mongoose.Types.ObjectId(),
             profileImage: member.profileImage,
             name: member.name,
             keywords: member.keywords,
         });
-        return { success, err };
+        return data;
     } catch (e) {
         console.log(e);
     }
 };
 
-export const deleteMember = async (id) => {
+export const deleteMember = async (id: string) => {
     try {
-        const {
-            data: { success, err },
-        } = await axios.delete(`${URI.MEMBERS}/${id}`);
-        return { success, err };
+        const { data } = await axios.delete(`${URI.MEMBERS}/${id}`);
+        return data;
     } catch (e) {
         console.log(e);
     }
