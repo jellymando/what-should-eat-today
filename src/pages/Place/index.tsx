@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 import { placesQueryState, selectedPlaceState, searchKeywordState, selectedKeywordsState } from "store/atom";
 import { placeListSelector } from "store/selector";
@@ -25,6 +25,19 @@ const Place = () => {
         setSearchKeyword(value);
     };
 
+    const searchInit = () => {
+        setSelectedPlace({
+            _id: "",
+            name: "",
+            latlng: {
+                x: 0,
+                y: 0,
+            },
+        });
+        setSelectedKeywords([]);
+        setSearchKeyword("");
+    };
+
     const addPlaceButtonHandler = async () => {
         if (!selectedPlace) return alert(MESSAGE.PLACES.ERROR.EMPTY);
         const { success, err } = await addPlace({ ...selectedPlace, keywords: selectedKeywords });
@@ -35,15 +48,6 @@ const Place = () => {
                     break;
             }
         } else {
-            setSelectedPlace({
-                _id: "",
-                name: "",
-                latlng: {
-                    x: 0,
-                    y: 0,
-                },
-            });
-            setSelectedKeywords([]);
             setPlaceQuery(selectedPlace._id);
             setIsAddMode(false);
         }
@@ -56,6 +60,12 @@ const Place = () => {
         }
     };
 
+    useEffect(() => {
+        if (!isAddMode) {
+            searchInit();
+        }
+    }, [isAddMode]);
+
     return (
         <>
             {isAddMode ? (
@@ -63,7 +73,7 @@ const Place = () => {
                     <Container>
                         <InputButtonBox buttonText="검색" handleClickButton={searchButtonHandler} />
                         <PlaceListMap />
-                        {selectedPlace && <KeywordBox />}
+                        {selectedPlace.name && <KeywordBox />}
                     </Container>
                     <ButtonBox buttonText="밥집 추가" handleClickButton={addPlaceButtonHandler} />
                 </>

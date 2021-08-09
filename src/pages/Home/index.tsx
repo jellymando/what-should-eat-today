@@ -27,11 +27,6 @@ const Home = () => {
         }, 4000);
     }, [isOpenModal]);
 
-    useEffect(() => {
-        console.log("filteredPlaceList", filteredPlaceList);
-        console.log("randomPlace", randomPlace);
-    }, [filteredPlaceList, randomPlace]);
-
     return (
         <>
             <MemberBox />
