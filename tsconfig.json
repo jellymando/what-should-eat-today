@@ -1,8 +1,28 @@
 {
   "compilerOptions": {
-    "sourceMap": true,  // 소스맵(*.map) 파일 생성 여부
-    "jsx": "react", // Resolve: Cannot use JSX unless '--jsx' flag is provided
-    "esModuleInterop": true, // import * as => import
-    "baseUrl": "src"
-  }
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "target": "es2015",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
+  },
+  "include": [
+    "src"
+  ]
 }
