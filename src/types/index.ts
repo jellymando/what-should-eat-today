@@ -4,14 +4,14 @@ declare global {
     }
 }
 
-export type MemberType = {
+export interface MemberType {
     _id?: string;
     profileImage: string;
     name: string;
     keywords: string[];
 };
 
-export type PlaceType = {
+export interface PlaceType {
     _id: string;
     name: string;
     latlng: {
@@ -21,7 +21,7 @@ export type PlaceType = {
     keywords: string[];
 };
 
-export type KeywordType = {
+export interface KeywordType {
     _id: string;
     title: string;
 };
