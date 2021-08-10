@@ -15,7 +15,7 @@ export const getPlaces = async () => {
 export const addPlace = async (place: PlaceType) => {
     try {
         const { data } = await axios.post(URI.PLACES, {
-            _id: new mongoose.Types.ObjectId(),
+            _id: place._id,
             name: place.name,
             latlng: place.latlng,
             keywords: place.keywords,

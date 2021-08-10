@@ -28,7 +28,7 @@ const PlaceListMap = () => {
     }, [mapRef]);
 
     useEffect(() => {
-        if (!map || !searchKeyword) return;
+        if (Object.keys(map).length === 0 || !searchKeyword) return;
         const ps = new window.kakao.maps.services.Places();
         const options = {
             category_group_code: "FD6",
@@ -39,7 +39,7 @@ const PlaceListMap = () => {
                 for (let i = 0; i < data.length; i++) {
                     const position = new window.kakao.maps.LatLng(data[i].y, data[i].x);
                     map.displayMarker({
-                        _id: data[i]._id,
+                        _id: data[i].id,
                         placeName: data[i].place_name,
                         position,
                         handleClickTarget,
