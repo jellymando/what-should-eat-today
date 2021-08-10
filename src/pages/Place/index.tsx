@@ -22,6 +22,7 @@ const Place = () => {
     const setPlaceQuery = useSetRecoilState(placesQueryState);
 
     const searchButtonHandler = (value: string) => {
+        setSelectedKeywords([]);
         setSearchKeyword(value);
     };
 
@@ -71,7 +72,7 @@ const Place = () => {
             {isAddMode ? (
                 <>
                     <Container>
-                        <InputButtonBox buttonText="검색" handleClickButton={searchButtonHandler} />
+                        <InputButtonBox buttonText="검색" handleClickButton={searchButtonHandler} focus={true} />
                         <PlaceListMap />
                         {selectedPlace.name && <KeywordBox />}
                     </Container>

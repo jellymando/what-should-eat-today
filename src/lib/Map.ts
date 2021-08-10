@@ -78,7 +78,7 @@ export default class Map {
         this.markers.push(marker);
     }
 
-    closeInfoWindow() {
+    clear() {
         for (const marker of this.markers) {
             marker.setMap(null);
         }

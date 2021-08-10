@@ -42,7 +42,7 @@ const HomeMap = () => {
 
     useEffect(() => {
         if (Object.keys(map).length === 0 || !(filteredPlaceList.length > 0)) return;
-        map.closeInfoWindow();
+        map.clear();
         for (const i in filteredPlaceList) {
             const position = new window.kakao.maps.LatLng(filteredPlaceList[i].latlng.y, filteredPlaceList[i].latlng.x);
             map.displayMarker({

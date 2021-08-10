@@ -49,6 +49,7 @@ const PlaceListMap = () => {
             }
         };
 
+        map.clear();
         ps.keywordSearch(searchKeyword, searchPlace, options);
     }, [map, searchKeyword]);
 
