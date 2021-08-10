@@ -17,6 +17,5 @@ module.exports = {
         "react/prop-types": "off",
         "no-unused-vars": 0,
         "no-debugger": "off",
-        "no-non-null-assertion": true,
     },
 };
