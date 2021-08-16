@@ -9,10 +9,11 @@ inquirer
         type: "input",
         name: "proxyDomain",
         message: "실행할 도메인을 입력해주세요.",
-        default: "http://localhost",
+        default: "localhost",
     })
     .then((answer) => {
-        fs.writeFileSync(ENV_PATH, `PROXY_DOMAIN=${answer.proxyDomain}`);
         const domain = answer.proxyDomain.match(/[^(http(s)?:\/\/)]([a-z0-9\w]+\.)+[a-z0-9]{2,}[^(:|/)]/gi)[0];
+        fs.writeFileSync(ENV_PATH, `PROXY_DOMAIN=${domain}`);
         exec(`HOST=${domain} react-scripts start`);
+        exec("node ./src/server/index.js");
     });
