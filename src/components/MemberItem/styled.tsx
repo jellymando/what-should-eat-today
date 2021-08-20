@@ -32,7 +32,17 @@ export const Member = styled.div<MemberProps>`
 `;
 
 export const Name = styled.p`
-    font-size: 13px;
+    max-width: 80%;
+    font-size: 12px;
     color: ${COLOR.WHITE};
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+    padding: 2px;
+    overflow: hidden;
+    line-height: 13px;
+    max-height: 30px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 `;
