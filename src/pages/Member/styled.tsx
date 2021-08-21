@@ -14,7 +14,7 @@ export const List = styled.li`
 `;
 
 export const Title = styled.h2`
-    font-size: 16px;
+    font-size: ${FONTSIZE.MIDDLE};
     font-weight: 700;
     color: ${COLOR.ORANGE2};
     margin-bottom: 10px;

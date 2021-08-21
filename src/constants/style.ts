@@ -15,4 +15,5 @@ export const FONTSIZE = {
     LARGE: "18px",
     MIDDLE: "16px",
     SMALL: "14px",
+    XSMALL: "12px",
 };

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLOR } from "constants/style";
+import { COLOR, FONTSIZE } from "constants/style";
 
 export const Container = styled.div`
     position: absolute;
@@ -20,7 +20,7 @@ export const Nav = styled.ul`
 `;
 
 export const Menu = styled.li`
-    font-size: 17px;
+    font-size: ${FONTSIZE.LARGE};
     color: ${COLOR.BLACK1};
     text-align: center;
     padding: 10px 0;

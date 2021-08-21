@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLOR } from "constants/style";
+import { COLOR, FONTSIZE } from "constants/style";
 
 type MemberProps = {
     isSelected: boolean;
@@ -33,7 +33,7 @@ export const Member = styled.div<MemberProps>`
 
 export const Name = styled.p`
     max-width: 80%;
-    font-size: 12px;
+    font-size: ${FONTSIZE.XSMALL};
     color: ${COLOR.WHITE};
     text-align: center;
     text-shadow: 0 0 4px rgba(0, 0, 0, 0.7);

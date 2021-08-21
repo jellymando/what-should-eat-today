@@ -22,10 +22,11 @@ export const ModalWrap = styled.div`
     border: 1px solid ${COLOR.GRAY2};
     border-radius: 10px;
     box-shadow: 0 0 10px ${COLOR.GRAY3};
+    overflow: hidden;
 `;
 
 export const Content = styled.div`
-    font-size: 14px;
+    font-size: ${FONTSIZE.SMALL};
     color: ${COLOR.BLACK1};
 
     img {
@@ -34,7 +35,7 @@ export const Content = styled.div`
 `;
 
 export const Title = styled.h2`
-    font-size: 16px;
+    font-size: ${FONTSIZE.MIDDLE};
     font-weight: 700;
     color: ${COLOR.ORANGE2};
     margin-bottom: 10px;
@@ -50,8 +51,31 @@ export const Input = styled.input`
     outline: none;
 `;
 
+export const Notice = styled.h2`
+    font-size: ${FONTSIZE.MIDDLE};
+    text-align: center;
+    color: ${COLOR.BLACK1};
+    margin: 5px 0 10px;
+`;
+
+export const Text = styled.p`
+    color: ${COLOR.BLACK2};
+    font-size: ${FONTSIZE.SMALL};
+    text-align: center;
+`;
+
+export const Loading = styled.div`
+    margin-bottom: 20px;
+
+    ${Text} {
+        color: ${COLOR.ORANGE1};
+        font-size: ${FONTSIZE.MIDDLE};
+        font-weight: 700;
+    }
+`;
+
 export const ErrorMsg = styled.p`
-    font-size: 12px;
+    font-size: ${FONTSIZE.XSMALL};
     color: ${COLOR.ORANGE1};
     margin-top: 5px;
 `;
@@ -59,7 +83,7 @@ export const ErrorMsg = styled.p`
 export const ButtonWrap = styled.div`
     display: flex;
     justify-content: center;
-    font-size: 14px;
+    font-size: ${FONTSIZE.SMALL};
     color: ${COLOR.BLACK1};
     margin-top: 15px;
 `;
@@ -67,7 +91,7 @@ export const ButtonWrap = styled.div`
 export const Button = styled.button`
     min-width: 60px;
     height: 35px;
-    font-size: 13px;
+    font-size: ${FONTSIZE.SMALL};
     color: ${COLOR.WHITE};
     background: ${COLOR.GRAY1};
     border-radius: 5px;
