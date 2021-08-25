@@ -17,3 +17,16 @@ export const FONTSIZE = {
     SMALL: "14px",
     XSMALL: "12px",
 };
+
+export const MEDIA = {
+    MOBILE: (css: string) => {
+        return `@media screen and (max-width: 600px) {
+                ${css}
+            }`;
+    },
+    TABLET: (css: string) => {
+        return `@media screen and (max-width: 1024px) {
+                ${css}
+            }`;
+    },
+};
