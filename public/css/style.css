@@ -1,5 +1,6 @@
 html,
-body {
+body,
+#root {
     height: 100%;
 }
 
@@ -18,14 +19,4 @@ a {
 
 li {
     list-style: none;
-}
-
-#root {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    max-width: 768px;
-    height: 100%;
-    margin: 0 auto;
-    padding: 0 10px 10px;
 }

@@ -1,5 +1,19 @@
 import styled from "styled-components";
-import { COLOR, FONTSIZE } from "constants/style";
+import { COLOR, FONTSIZE, MEDIA } from "constants/style";
+
+export const Container = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 10px 10px;
+
+    ${MEDIA.MOBILE(`
+        padding: 0 8px 8px;
+    `)};
+`;
 
 export const NoticeWrap = styled.div`
     width: 100%;

@@ -1,9 +1,13 @@
 import styled from "styled-components";
-import { COLOR, FONTSIZE } from "constants/style";
+import { COLOR, FONTSIZE, MEDIA } from "constants/style";
 
 export const ButtonWrap = styled.div`
     display: flex;
     margin-top: 10px;
+
+    ${MEDIA.MOBILE(`
+        margin-top: 8px;
+    `)};
 `;
 
 export const Button = styled.button`
@@ -21,4 +25,12 @@ export const Button = styled.button`
         margin-left: 5px;
         background: ${COLOR.ORANGE2};
     }
+
+    ${MEDIA.TABLET(`
+        font-size: ${FONTSIZE.MIDDLE};
+    `)};
+
+    ${MEDIA.MOBILE(`
+        height: 36px;
+    `)};
 `;

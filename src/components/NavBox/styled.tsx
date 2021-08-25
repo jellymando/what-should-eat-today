@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLOR, FONTSIZE } from "constants/style";
+import { COLOR, FONTSIZE, MEDIA } from "constants/style";
 
 export const Container = styled.div`
     position: absolute;
@@ -25,6 +25,11 @@ export const Menu = styled.li`
     text-align: center;
     padding: 10px 0;
     border-bottom: 1px solid ${COLOR.GRAY2};
+
+    ${MEDIA.MOBILE(`
+        font-size: ${FONTSIZE.MIDDLE};
+        padding: 8px 0;
+    `)};
 `;
 
 export const CloseIcon = styled.li`

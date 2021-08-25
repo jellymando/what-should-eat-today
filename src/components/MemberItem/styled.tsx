@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLOR, FONTSIZE } from "constants/style";
+import { COLOR, FONTSIZE, MEDIA } from "constants/style";
 
 type MemberProps = {
     isSelected: boolean;
@@ -29,6 +29,10 @@ export const Member = styled.div<MemberProps>`
         ${COLOR.GRAY2};
     margin-right: 3px;
     cursor: pointer;
+
+    ${MEDIA.MOBILE(`
+        margin-right: 0;
+    `)};
 `;
 
 export const Name = styled.p`
