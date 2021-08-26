@@ -2,7 +2,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
 const exec = require("child_process").exec;
-const ENV_PATH = path.resolve(__dirname, "./.env.domain");
+const ENV_PATH = path.resolve(__dirname, "./.env.local");
 
 inquirer
     .prompt({
@@ -14,7 +14,7 @@ inquirer
     .then((answer) => {
         const domain = answer.proxyDomain.match(/[^(http(s)?:\/\/)]([a-z0-9\w]+\.?)+[a-z0-9]{1,}[^(:|/)]/gi);
         if (!domain) return console.log("--- 올바른 형식의 도메인을 입력해주세요. ---");
-        fs.writeFileSync(ENV_PATH, `PROXY_DOMAIN=${domain[0]}`);
-        exec(`HOST=${domain[0]} react-scripts start`);
+        fs.writeFileSync(ENV_PATH, `HOST=${domain[0]}`);
+        exec(`react-scripts start`);
         exec("node ./src/server/index.js");
     });
