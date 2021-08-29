@@ -7,27 +7,27 @@ const Modal = ({
     contents,
     isErrorMsg,
     errorMsg,
-    handleClickSubmitButton,
-    handleClickCloseButton,
+    onClickCloseButton,
+    onClickSubmitButton,
 }: {
     title?: string;
     inputRef?: React.RefObject<HTMLInputElement>;
     contents?: JSX.Element;
     isErrorMsg?: boolean;
     errorMsg?: string;
-    handleClickSubmitButton?: () => void;
-    handleClickCloseButton: () => void;
+    onClickCloseButton: () => void;
+    onClickSubmitButton?: () => void;
 }) => {
     const modalRef = useRef(null);
 
     useEffect(() => {
         if (!modalRef.current) return;
         document.addEventListener("click", function ({ target }) {
-            if (target === modalRef.current) handleClickCloseButton();
+            if (target === modalRef.current) onClickCloseButton();
         });
         return () => {
             document.removeEventListener("click", function ({ target }) {
-                if (target === modalRef.current) handleClickCloseButton();
+                if (target === modalRef.current) onClickCloseButton();
             });
         };
     }, [modalRef]);
@@ -42,12 +42,12 @@ const Modal = ({
                     {isErrorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
                 </Content>
                 <ButtonWrap>
-                    {handleClickSubmitButton && (
-                        <Button isSubmit={true} onClick={handleClickSubmitButton}>
+                    {onClickSubmitButton && (
+                        <Button isSubmit={true} onClick={onClickSubmitButton}>
                             확인
                         </Button>
                     )}
-                    <Button onClick={handleClickCloseButton}>닫기</Button>
+                    <Button onClick={onClickCloseButton}>닫기</Button>
                 </ButtonWrap>
             </ModalWrap>
         </Container>

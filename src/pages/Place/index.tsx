@@ -21,7 +21,7 @@ const Place = () => {
     const placeList = useRecoilValue(placeListSelector);
     const setPlaceQuery = useSetRecoilState(placesQueryState);
 
-    const searchButtonHandler = (value: string) => {
+    const handleSearchButton = (value: string) => {
         setSelectedKeywords([]);
         setSearchKeyword(value);
     };
@@ -39,7 +39,7 @@ const Place = () => {
         setSearchKeyword("");
     };
 
-    const addPlaceButtonHandler = async () => {
+    const handleAddPlace = async () => {
         if (!selectedPlace) return alert(MESSAGE.PLACES.ERROR.EMPTY);
         const { success, err } = await addPlace({ ...selectedPlace, keywords: selectedKeywords });
         if (!success) {
@@ -54,7 +54,7 @@ const Place = () => {
         }
     };
 
-    const deletePlaceButtonHandler = async (id: string) => {
+    const handleDeletePlace = async (id: string) => {
         const { success, err } = await deletePlace(id);
         if (success) {
             setPlaceQuery(id);
@@ -72,16 +72,16 @@ const Place = () => {
             {isAddMode ? (
                 <>
                     <Container>
-                        <InputButtonBox buttonText="검색" handleClickButton={searchButtonHandler} focus={true} />
+                        <InputButtonBox buttonText="검색" onClickButton={handleSearchButton} focus={true} />
                         <PlaceListMap />
                         {selectedPlace.name && <KeywordBox />}
                     </Container>
-                    <ButtonBox buttonText="밥집 추가" handleClickButton={addPlaceButtonHandler} />
+                    <ButtonBox buttonText="밥집 추가" onClickButton={handleAddPlace} />
                 </>
             ) : (
-                <ListBox list={placeList} handleClickDeleteButton={deletePlaceButtonHandler} />
+                <ListBox list={placeList} onClickDeleteButton={handleDeletePlace} />
             )}
-            <SideButton isAddMode={isAddMode} handleClickButton={() => setIsAddMode(!isAddMode)} />
+            <SideButton isAddMode={isAddMode} onClickButton={() => setIsAddMode(!isAddMode)} />
         </>
     );
 };

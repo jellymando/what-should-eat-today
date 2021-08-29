@@ -49,13 +49,13 @@ export default class Map {
         _id,
         placeName,
         position,
-        handleClickTarget,
+        onClickTarget,
         isDisplay,
     }: {
         _id: string;
         placeName: string;
         position: any;
-        handleClickTarget?: ({ _id, placeName, position }: { _id: string; placeName: string; position: any }) => void;
+        onClickTarget?: ({ _id, placeName, position }: { _id: string; placeName: string; position: any }) => void;
         isDisplay?: boolean;
     }) {
         const marker = new window.kakao.maps.Marker({
@@ -67,11 +67,11 @@ export default class Map {
 
         window.kakao.maps.event.addListener(marker, "click", () => {
             this.displayInfoWindow({ placeName, marker });
-            if (handleClickTarget) handleClickTarget({ _id, placeName, position });
+            if (onClickTarget) onClickTarget({ _id, placeName, position });
         });
 
         if (isDisplay) {
-            if (handleClickTarget) handleClickTarget({ _id, placeName, position });
+            if (onClickTarget) onClickTarget({ _id, placeName, position });
             this.displayInfoWindow({ placeName, marker });
         }
 

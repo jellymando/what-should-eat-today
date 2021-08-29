@@ -15,14 +15,14 @@ const MemberBox = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const timerRef: { current: NodeJS.Timeout | null } = useRef(null);
 
-    const searchMemberHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearchMember = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
         if (timerRef.current) clearTimeout(timerRef.current);
         timerRef.current = setTimeout(() => {
             setFilteredMembers(memberList.filter((member: MemberType) => member.name.includes(target?.value)));
         }, 300);
     };
 
-    const selectMemberHandler = ({
+    const handleSelectMember = ({
         setIsSeleted,
         isSelected,
         name,
@@ -36,11 +36,11 @@ const MemberBox = () => {
             const selectedMember = memberList.filter((member: MemberType) => member.name === name);
             setSelectedMembers([...selectedMembers, ...selectedMember]);
         } else {
-            unselectMemberHandler({ name });
+            handleUnselectMember({ name });
         }
     };
 
-    const unselectMemberHandler = ({ name }: { name: string }) => {
+    const handleUnselectMember = ({ name }: { name: string }) => {
         const unselectedMembers = selectedMembers.filter((member) => member.name !== name);
         setSelectedMembers([...unselectedMembers]);
     };
@@ -54,7 +54,7 @@ const MemberBox = () => {
         <>
             <Container>
                 <MemberWrap>
-                    <AddMemberItem handleClickAddMember={() => setIsOpenModal(true)} />
+                    <AddMemberItem onClickAddMember={() => setIsOpenModal(true)} />
                     {selectedMembers.length > 0 &&
                         selectedMembers.map((member) => {
                             return (
@@ -62,7 +62,7 @@ const MemberBox = () => {
                                     key={member._id}
                                     profileImage={member.profileImage}
                                     name={member.name}
-                                    handleClickMember={unselectMemberHandler}
+                                    onClickMember={handleUnselectMember}
                                 />
                             );
                         })}
@@ -74,7 +74,7 @@ const MemberBox = () => {
                         title="같이 밥먹을 파티원 추가"
                         contents={
                             <>
-                                <Input ref={inputRef} onChange={(e) => searchMemberHandler(e)} />
+                                <Input ref={inputRef} onChange={(e) => handleSearchMember(e)} />
                                 <MemberWrap>
                                     {filteredMembers.length > 0 &&
                                         filteredMembers.map((member: MemberType) => {
@@ -88,14 +88,14 @@ const MemberBox = () => {
                                                             (selectedMember) => selectedMember.name === member.name
                                                         )
                                                     }
-                                                    handleClickMember={selectMemberHandler}
+                                                    onClickMember={handleSelectMember}
                                                 />
                                             );
                                         })}
                                 </MemberWrap>
                             </>
                         }
-                        handleClickCloseButton={() => setIsOpenModal(false)}
+                        onClickCloseButton={() => setIsOpenModal(false)}
                     />
                 </ModalPortal>
             )}

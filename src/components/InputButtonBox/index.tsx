@@ -3,11 +3,11 @@ import { SearchWrap, SearchInput, SearchButton } from "./styled";
 
 const InputButtonBox = ({
     buttonText,
-    handleClickButton,
+    onClickButton,
     focus,
 }: {
     buttonText: string;
-    handleClickButton: (value: string) => void;
+    onClickButton: (value: string) => void;
     focus?: boolean;
 }) => {
     const searchInputRef = useRef<HTMLInputElement>(null);
@@ -22,7 +22,7 @@ const InputButtonBox = ({
             <SearchInput ref={searchInputRef} />
             <SearchButton
                 onClick={() => {
-                    handleClickButton(searchInputRef.current!.value);
+                    onClickButton(searchInputRef.current!.value);
                     searchInputRef.current!.value = "";
                 }}
             >

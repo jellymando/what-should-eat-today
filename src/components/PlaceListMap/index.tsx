@@ -42,7 +42,7 @@ const PlaceListMap = () => {
                         _id: data[i].id,
                         placeName: data[i].place_name,
                         position,
-                        handleClickTarget,
+                        onClickTarget: handleClickTarget,
                         isDisplay: i === 0,
                     });
                 }

@@ -6,7 +6,7 @@ import { Container, Nav, Menu, CloseIcon } from "./styled";
 
 const NavBox = () => {
     const setIsNavOpen = useSetRecoilState(isNavOpenState);
-    const closeNavHandler = () => {
+    const handleCloseNav = () => {
         setIsNavOpen(false);
     };
 
@@ -14,17 +14,17 @@ const NavBox = () => {
         <Container>
             <Nav>
                 <Menu>
-                    <Link to="/member" onClick={closeNavHandler}>
+                    <Link to="/member" onClick={handleCloseNav}>
                         인간리스트
                     </Link>
                 </Menu>
                 <Menu>
-                    <Link to="/place" onClick={closeNavHandler}>
+                    <Link to="/place" onClick={handleCloseNav}>
                         밥집리스트
                     </Link>
                 </Menu>
             </Nav>
-            <CloseIcon onClick={closeNavHandler} />
+            <CloseIcon onClick={handleCloseNav} />
         </Container>
     );
 };

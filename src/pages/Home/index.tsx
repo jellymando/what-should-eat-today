@@ -42,12 +42,12 @@ const Home = () => {
             <HomeMap />
             <ButtonBox
                 buttonText="랜덤 메뉴"
-                handleClickButton={() => {
+                onClickButton={() => {
                     setIsOpenModal(true);
                     setModalMode("random");
                 }}
                 buttonTextSecond="커피 내기"
-                handleClickButtonSecond={() => {
+                onClickButtonSecond={() => {
                     setIsOpenModal(true);
                     setModalMode("coffee");
                 }}
@@ -97,7 +97,7 @@ const Home = () => {
                                 </>
                             )
                         }
-                        handleClickCloseButton={() => {
+                        onClickCloseButton={() => {
                             setIsOpenModal(false);
                             setIsLoading(true);
                         }}

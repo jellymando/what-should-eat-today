@@ -4,11 +4,11 @@ import { ListWrap, List, Image, Title, Content, KeywordWrap, Keyword, TrashIcon 
 
 const ListBox = ({
     list,
-    handleClickDeleteButton,
+    onClickDeleteButton,
     hasImage,
 }: {
     list: any[];
-    handleClickDeleteButton: (id: string) => void;
+    onClickDeleteButton: (id: string) => void;
     hasImage?: boolean;
 }) => {
     return (
@@ -28,7 +28,7 @@ const ListBox = ({
                                     </KeywordWrap>
                                 )}
                             </Content>
-                            <TrashIcon onClick={() => handleClickDeleteButton(item._id)} />
+                            <TrashIcon onClick={() => onClickDeleteButton(item._id)} />
                         </List>
                     );
                 })}

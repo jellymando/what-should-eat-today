@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { AddMember, Member, Name } from "./styled";
 
-export const AddMemberItem = ({ handleClickAddMember }: { handleClickAddMember: () => void }) => {
-    return <AddMember onClick={handleClickAddMember} />;
+export const AddMemberItem = ({ onClickAddMember }: { onClickAddMember: () => void }) => {
+    return <AddMember onClick={onClickAddMember} />;
 };
 
 export const MemberItem = ({
     profileImage,
     name,
     selected = false,
-    handleClickMember,
+    onClickMember,
 }: {
     profileImage: string;
     name: string;
     selected?: boolean;
-    handleClickMember: ({
+    onClickMember: ({
         setIsSeleted,
         isSelected,
         name,
@@ -30,7 +30,7 @@ export const MemberItem = ({
         <Member
             isSelected={isSelected}
             imageUrl={profileImage}
-            onClick={() => handleClickMember({ setIsSeleted, isSelected, name })}
+            onClick={() => onClickMember({ setIsSeleted, isSelected, name })}
         >
             <Name>{name}</Name>
         </Member>

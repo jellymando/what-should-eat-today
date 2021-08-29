@@ -3,17 +3,17 @@ import { ButtonWrap, Button } from "./styled";
 
 type Props = {
     buttonText: string;
-    handleClickButton: () => void;
+    onClickButton: () => void;
     buttonTextSecond?: string;
-    handleClickButtonSecond?: () => void;
+    onClickButtonSecond?: () => void;
 };
 
-const ButtonBox = ({ buttonText, handleClickButton, buttonTextSecond, handleClickButtonSecond }: Props) => {
+const ButtonBox = ({ buttonText, onClickButton, buttonTextSecond, onClickButtonSecond }: Props) => {
     return (
         <ButtonWrap>
-            <Button onClick={() => handleClickButton()}>{buttonText}</Button>
-            {buttonTextSecond && handleClickButtonSecond && (
-                <Button onClick={() => handleClickButtonSecond()}>{buttonTextSecond}</Button>
+            <Button onClick={() => onClickButton()}>{buttonText}</Button>
+            {buttonTextSecond && onClickButtonSecond && (
+                <Button onClick={() => onClickButtonSecond()}>{buttonTextSecond}</Button>
             )}
         </ButtonWrap>
     );

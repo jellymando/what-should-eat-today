@@ -13,7 +13,7 @@ const KeywordBox = () => {
     const keywordList = useRecoilValue(keywordListSelector);
     const setAddKeywordQuery = useSetRecoilState(keywordsQueryState);
 
-    const addKeywordHandler = async (value: string) => {
+    const handleClickButton = async (value: string) => {
         const title = value.trim();
         if (!(title.length > 0)) return alert(MESSAGE.KEYWORDS.ERROR.EMPTY);
         const { success, err } = await addKeyword(title);
@@ -30,7 +30,7 @@ const KeywordBox = () => {
 
     return (
         <Container>
-            <InputButtonBox buttonText="추가" handleClickButton={addKeywordHandler} focus={false} />
+            <InputButtonBox buttonText="추가" onClickButton={handleClickButton} focus={false} />
             <KeywordWrap>
                 {keywordList &&
                     keywordList.map((keyword: KeywordType) => {

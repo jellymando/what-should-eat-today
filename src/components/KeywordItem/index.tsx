@@ -10,20 +10,20 @@ const KeywordItem = ({ id, title }: { id: string; title: string }) => {
     const [selectedKeywords, setSelectedKeywords] = useRecoilState(selectedKeywordsState);
     const setAddKeywordQuery = useSetRecoilState(keywordsQueryState);
 
-    const selectKeywordHandler = (title: string) => {
+    const onSelectKeyword = (title: string) => {
         setIsSelected(!isSelected);
         setSelectedKeywords([...selectedKeywords, title]);
     };
 
-    const deleteKeywordHandler = async () => {
+    const onDeleteKeyword = async () => {
         const { success, err } = await deleteKeyword(id);
         if (success) setAddKeywordQuery(title);
     };
 
     return (
         <Keyword isSelected={isSelected}>
-            <Text onClick={() => selectKeywordHandler(title)}>{title}</Text>
-            <TrashIcon onClick={() => deleteKeywordHandler()} />
+            <Text onClick={() => onSelectKeyword(title)}>{title}</Text>
+            <TrashIcon onClick={() => onDeleteKeyword()} />
         </Keyword>
     );
 };

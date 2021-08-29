@@ -23,7 +23,7 @@ const Member = () => {
     const [imageUrl, setImageUrl] = useState("");
     const [isErrorMsg, setIsErrorMsg] = useState(false);
 
-    const addProfileImage = () => {
+    const handleAddProfileImage = () => {
         const urlMatch = /(http(s)?:\/\/)([a-z0-9\w]+\.)+[a-z0-9]{2,4}(.*?)\.((jpe?|pn)g|gif)/gi.test(
             urlInputRef.current!.value
         );
@@ -35,7 +35,7 @@ const Member = () => {
         }
     };
 
-    const addMemberButtonHandler = async () => {
+    const handleAddMember = async () => {
         const name = nameInputRef.current!.value.trim();
         if (!(name.length > 0)) return alert(MESSAGE.MEMBERS.ERROR.EMPTY);
         const { success, err } = await addMember({ profileImage: imageUrl, name, keywords: selectedKeywords });
@@ -51,7 +51,7 @@ const Member = () => {
         }
     };
 
-    const deleteMemberButtonHandler = async (id: string) => {
+    const handleDeleteMember = async (id: string) => {
         const { success, err } = await deleteMember(id);
         if (success) setMemberQuery(id);
     };
@@ -88,12 +88,12 @@ const Member = () => {
                             <KeywordBox />
                         </List>
                     </Form>
-                    <ButtonBox buttonText="멤버 추가" handleClickButton={addMemberButtonHandler} />
+                    <ButtonBox buttonText="멤버 추가" onClickButton={handleAddMember} />
                 </Container>
             ) : (
-                <ListBox list={memberList} handleClickDeleteButton={deleteMemberButtonHandler} hasImage={true} />
+                <ListBox list={memberList} onClickDeleteButton={handleDeleteMember} hasImage={true} />
             )}
-            <SideButton isAddMode={isAddMode} handleClickButton={() => setIsAddMode(!isAddMode)} />
+            <SideButton isAddMode={isAddMode} onClickButton={() => setIsAddMode(!isAddMode)} />
             {isOpenModal && (
                 <ModalPortal>
                     <Modal
@@ -101,8 +101,8 @@ const Member = () => {
                         inputRef={urlInputRef}
                         isErrorMsg={isErrorMsg}
                         errorMsg="URL 형식을 확인해주세요."
-                        handleClickSubmitButton={() => addProfileImage()}
-                        handleClickCloseButton={() => setIsOpenModal(false)}
+                        onClickSubmitButton={() => handleAddProfileImage()}
+                        onClickCloseButton={() => setIsOpenModal(false)}
                     />
                 </ModalPortal>
             )}
