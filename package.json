@@ -23,7 +23,7 @@
     },
     "scripts": {
         "start": "node domainConfig.js",
-        "start:app": "node setupApp.js",
+        "start:app": "react-scripts start",
         "start:server": "node ./src/server/index.js",
         "build": "react-scripts build"
     },
