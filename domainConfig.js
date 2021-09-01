@@ -12,7 +12,7 @@ inquirer
         default: "localhost",
     })
     .then((answer) => {
-        const domain = answer.proxyDomain.match(/[^(http(s)?:\/\/)]([a-z0-9\w]+\.?)+[a-z0-9]{1,}[^(:|/)]/gi);
+        const domain = answer.proxyDomain.match(/[^(http(s)?:\/\/)]+([a-z0-9\w]+\.?)+[a-z0-9]{1,}[^(:|/)]/gi);
         if (!domain) return console.log("--- 올바른 형식의 도메인을 입력해주세요. ---");
         fs.writeFileSync(ENV_PATH, `HOST=${domain[0]}`);
         exec(`react-scripts start`);
