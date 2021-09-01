@@ -27,7 +27,6 @@ export const Menu = styled.li`
     border-bottom: 1px solid ${COLOR.GRAY2};
 
     ${MEDIA.MOBILE(`
-        font-size: ${FONTSIZE.MIDDLE};
         padding: 8px 0;
     `)};
 `;

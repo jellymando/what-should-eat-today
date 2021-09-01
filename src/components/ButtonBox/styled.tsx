@@ -26,10 +26,6 @@ export const Button = styled.button`
         background: ${COLOR.ORANGE2};
     }
 
-    ${MEDIA.TABLET(`
-        font-size: ${FONTSIZE.MIDDLE};
-    `)};
-
     ${MEDIA.MOBILE(`
         height: 36px;
     `)};

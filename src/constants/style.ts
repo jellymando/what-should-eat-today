@@ -12,10 +12,10 @@ export const COLOR = {
 };
 
 export const FONTSIZE = {
-    LARGE: "18px",
-    MIDDLE: "16px",
-    SMALL: "14px",
-    XSMALL: "12px",
+    LARGE: "1.8rem",
+    MIDDLE: "1.6rem",
+    SMALL: "1.4rem",
+    XSMALL: "1.2rem",
 };
 
 export const MEDIA = {
